@@ -49,6 +49,9 @@ flutter:
     - assets/screens/intro/
     - assets/screens/permission/
     - assets/screens/faq/
+    - assets/screens/report/
+    - assets/screens/request/
+    - assets/screens/request/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
