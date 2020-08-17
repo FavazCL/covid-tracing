@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
 
-class Colors {
+class ColorsPalette {
   static final primary = Color(0xff6C63FF);
 }
