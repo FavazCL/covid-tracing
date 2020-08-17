@@ -1,7 +1,7 @@
 import 'package:covid_app/src/screens/report/widgets/pin_text_field.dart';
 import 'package:covid_app/src/utils/colors.dart';
 import 'package:covid_app/src/utils/responsive.dart';
-import 'package:covid_app/src/widgets/%20paragraph.dart';
+import 'package:covid_app/src/widgets/paragraph.dart';
 import 'package:covid_app/src/widgets/header.dart';
 import 'package:covid_app/src/widgets/image_header.dart';
 import 'package:covid_app/src/widgets/rounded_button.dart';
