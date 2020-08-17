@@ -1,6 +1,7 @@
 import 'package:covid_app/src/screens/home/home_ui.dart';
 import 'package:covid_app/src/screens/report/report_ui.dart';
 import 'package:covid_app/src/screens/request/request_ui.dart';
+import 'package:covid_app/src/screens/sympthom/sympthom_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -24,11 +25,12 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'monse'     
       ),
-      home: RequestUI(),
+      home: SympthomUI(),
       routes: {
         HomeUI.routeName: (_) => HomeUI(),
         ReportUI.routeName: (_) => ReportUI(),
-        RequestUI.routeName: (_) => RequestUI()
+        RequestUI.routeName: (_) => RequestUI(),
+        SympthomUI.routeName: (_) => SympthomUI()
       },
     );
   }
