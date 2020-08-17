@@ -1,5 +1,6 @@
 import 'package:covid_app/src/screens/home/home_ui.dart';
 import 'package:covid_app/src/screens/report/report_ui.dart';
+import 'package:covid_app/src/screens/request/request_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -23,10 +24,11 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'monse'     
       ),
-      home: ReportUI(),
+      home: RequestUI(),
       routes: {
         HomeUI.routeName: (_) => HomeUI(),
-        ReportUI.routeName: (_) => ReportUI()
+        ReportUI.routeName: (_) => ReportUI(),
+        RequestUI.routeName: (_) => RequestUI()
       },
     );
   }
