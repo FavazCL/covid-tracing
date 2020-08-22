@@ -1,4 +1,5 @@
-import 'package:covid_app/src/widgets/dot.dart';
+import 'package:covid_app/src/screens/intro/widgets/dot.dart';
+import 'package:covid_app/src/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class Dots extends StatelessWidget {
@@ -6,9 +7,11 @@ class Dots extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Responsive responsive = Responsive.of(context);
+    
     return Container(
       width: double.infinity,
-      height: 70,
+      height: responsive.dp(18),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
