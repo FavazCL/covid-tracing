@@ -20,7 +20,7 @@ class Slide extends StatelessWidget {
     return SafeArea(
       child: Container(
           width: double.infinity,
-          height: double.infinity,
+          //height: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,

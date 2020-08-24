@@ -1,4 +1,4 @@
-import 'package:covid_app/src/screens/intro/intro_ui.dart';
+import 'package:covid_app/src/screens/permission/permission_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'monse'     
       ),
-      home: IntroUI()
+      home: PermissionUI()
     );
   }
 }
