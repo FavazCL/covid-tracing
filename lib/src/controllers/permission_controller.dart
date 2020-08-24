@@ -1,4 +1,5 @@
 import 'package:covid_app/src/widgets/error_dialog.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:get/get.dart';
 
 class PermissionController extends GetxController {
@@ -38,20 +39,40 @@ class PermissionController extends GetxController {
   }
 
   Future<void> _getLocation() async {
-    // TO DO..
+    this._location = await Permission.location.request().isGranted;
+
+    if (this._location) {
+      update(['permission']);
+    }
+
+    _verify();
   }
 
   Future<void> _getNotification() async {
-    // TO DO..
+    this._notification = await Permission.notification.request().isGranted;
+    
+    if (this._notification) {
+      update(['permission']);
+    }
+
+    _verify();
   }
 
   Future<void> _getBattery() async {
-    // TO DO..
+    this._batery = await Permission.ignoreBatteryOptimizations.request().isGranted;
+
+    if (this._batery) {
+      update(['permission']);
+    }
+
+    _verify();
   }
 
   void _verify() {
-    if (_location && _notification && _batery) {
+    if (this._location && this._notification && this._batery) {
       print('Todos los permisos otorgados');
+    } else {
+      print('aun no');
     }
   }
 }

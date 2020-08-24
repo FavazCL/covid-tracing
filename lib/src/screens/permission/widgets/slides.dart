@@ -14,6 +14,7 @@ class Slides extends StatelessWidget {
     final Responsive responsive = Responsive.of(context);
 
     return GetBuilder<PermissionController>(
+      id: 'permission',
       init: PermissionController(),
       builder: (_) {
         return Container(
@@ -63,7 +64,7 @@ class Slides extends StatelessWidget {
               children: [
                 Slide(
                   svg: 'assets/screens/permission/time_management.svg',
-                  title: 'BATERIA',
+                  title: 'BATERÍA',
                   description:
                       'Es necesario para reducir el consumo de bateria por parte de la app.',
                 ),
