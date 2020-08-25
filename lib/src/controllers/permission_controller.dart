@@ -1,8 +1,12 @@
+import 'package:covid_app/src/screens/home/home_ui.dart';
+import 'package:covid_app/src/utils/shared_preferences/shared_prefs.dart';
 import 'package:covid_app/src/widgets/error_dialog.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:get/get.dart';
 
 class PermissionController extends GetxController {
+  final SharedPrefs sharedPrefs = Get.put(SharedPrefs());
+
   RxInt _page = 0.obs;
   bool _location = false;
   bool _notification = false;
@@ -70,7 +74,8 @@ class PermissionController extends GetxController {
 
   void _verify() {
     if (this._location && this._notification && this._batery) {
-      print('Todos los permisos otorgados');
+      sharedPrefs.permissions = true;
+      Get.to(HomeUI());
     } else {
       print('aun no');
     }

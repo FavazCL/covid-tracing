@@ -1,4 +1,4 @@
-import 'package:covid_app/src/screens/permission/permission_ui.dart';
+import 'package:covid_app/src/screens/intro/intro_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -17,13 +17,13 @@ class MyApp extends StatelessWidget {
     ]);
 
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'Covid tracing',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'monse'     
       ),
-      home: PermissionUI()
+      home: IntroUI()
     );
   }
 }

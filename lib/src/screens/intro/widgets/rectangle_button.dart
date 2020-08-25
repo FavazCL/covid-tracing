@@ -1,7 +1,9 @@
 import 'package:covid_app/src/controllers/intro_controller.dart';
 import 'package:covid_app/src/screens/home/home_ui.dart';
+import 'package:covid_app/src/screens/permission/permission_ui.dart';
 import 'package:covid_app/src/utils/colors.dart';
 import 'package:covid_app/src/utils/responsive.dart';
+import 'package:covid_app/src/utils/shared_preferences/shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,9 +13,9 @@ class RectangleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final IntroController introController =
-        Get.find<IntroController>();
+    final IntroController introController = Get.find<IntroController>();
     final Responsive responsive = Responsive.of(context);
+    final SharedPrefs sharedPrefs = Get.put(SharedPrefs());
 
     return Obx(() {
       return Container(
@@ -30,8 +32,12 @@ class RectangleButton extends StatelessWidget {
                         ? Colors.white
                         : ColorsPalette.primary)),
             onPressed: () =>
-                introController.page == 3 ? Get.to(HomeUI()) : null,
+                introController.page == 3 ? _verifyPermissions(sharedPrefs) : null,
           ));
     });
+  }
+
+  void _verifyPermissions(SharedPrefs sharedPrefs) {
+    (sharedPrefs.permissions) ? Get.to(HomeUI()) : Get.to(PermissionUI());
   }
 }
