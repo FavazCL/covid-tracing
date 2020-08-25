@@ -1,5 +1,5 @@
-import 'package:covid_app/src/controllers/slideshow_controller.dart';
-import 'package:covid_app/src/screens/intro/widgets/slide.dart';
+import 'package:covid_app/src/controllers/intro_controller.dart';
+import 'package:covid_app/src/widgets/slide.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 
@@ -8,8 +8,8 @@ class Slides extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SlideshowController>(
-      init: SlideshowController(),
+    return GetBuilder<IntroController>(
+      init: IntroController(),
       builder: (_) {
         return Container(
             child: PageView(

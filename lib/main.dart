@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     ]);
 
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'Covid tracing',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,

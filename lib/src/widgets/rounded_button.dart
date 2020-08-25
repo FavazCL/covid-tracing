@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class RoundedButton extends StatelessWidget {
   final String text;
   final Color color;
-  const RoundedButton({Key key, 
-    @required this.text, 
-    @required this.color})
+  final VoidCallback onPressed;
+  const RoundedButton(
+      {Key key, @required this.text, @required this.color, this.onPressed})
       : assert(text != null),
         super(key: key);
 
@@ -24,16 +24,15 @@ class RoundedButton extends StatelessWidget {
           this.text,
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Colors.white, 
-            fontFamily: 'monse',
-            fontWeight: FontWeight.w600,
-            letterSpacing: 0.5
-          ),
+              color: Colors.white,
+              fontFamily: 'monse',
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0.5),
         ),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(60.0)),
         elevation: 1,
-        onPressed: () {},
+        onPressed: this.onPressed,
       ),
     ));
   }

@@ -1,4 +1,4 @@
-import 'package:covid_app/src/controllers/intro_controller.dart';
+import 'package:covid_app/src/controllers/permission_controller.dart';
 import 'package:covid_app/src/utils/colors.dart';
 import 'package:covid_app/src/utils/responsive.dart';
 import 'package:flutter/material.dart';
@@ -11,19 +11,19 @@ class Dot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final IntroController introController =
-        Get.find<IntroController>();
+    final PermissionController permissionController =
+        Get.find<PermissionController>();
     final Responsive responsive = Responsive.of(context);
 
     return Obx(() {
       return AnimatedContainer(
         duration: Duration(milliseconds: 100),
         curve: Curves.linear,
-        width: this.position == introController.page ? 20 : responsive.dp(1.3),
+        width: this.position == permissionController.page ? 20 : responsive.dp(1.3),
         height: responsive.dp(1.3),
         margin: EdgeInsets.symmetric(horizontal: responsive.dp(0.5)),
         decoration: BoxDecoration(
-            color: this.position == introController.page
+            color: this.position == permissionController.page
                 ? ColorsPalette.primary
                 : Colors.grey,
                 borderRadius: BorderRadius.circular(12),
