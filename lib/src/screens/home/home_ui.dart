@@ -1,3 +1,6 @@
+import 'package:covid_app/src/screens/home/widgets/bottom_navigator.dart';
+import 'package:covid_app/src/utils/colors.dart';
+import 'package:covid_app/src/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class HomeUI extends StatelessWidget {
@@ -6,8 +9,10 @@ class HomeUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final Responsive responsive = Responsive.of(context);
 
+    return Scaffold(
+      bottomSheet: BottomNavigator(),
     );
   }
 }
