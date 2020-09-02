@@ -15,7 +15,7 @@ class CircularPainter extends CustomPainter {
     lapiz.maskFilter = MaskFilter.blur(BlurStyle.normal, _sigma);
 
     canvas.drawCircle(
-      Offset(size.width * 0.49, size.height * 0.33),
+      Offset(size.width * 0.49, size.height * 0.306),
       size.width * 0.30,
       lapiz
     );

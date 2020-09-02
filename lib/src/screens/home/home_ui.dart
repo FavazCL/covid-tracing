@@ -53,7 +53,7 @@ class HomeUI extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: responsive.dp(15),
+                top: responsive.dp(13),
                 left: responsive.dp(10),
                 child: Hero(
                     tag: 'scan',
