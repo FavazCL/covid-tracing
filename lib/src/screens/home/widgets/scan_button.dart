@@ -16,26 +16,22 @@ class ScanButton extends StatelessWidget {
         width: responsive.dp(25),
         alignment: Alignment.center,
         child: Text('ESCANEAR',
+        textAlign: TextAlign.center,
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: responsive.dp(2),
                 color: Colors.white)),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(responsive.dp(50)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.white.withOpacity(0.5),
-                spreadRadius: 1,
-                blurRadius: 3,
-              )
-            ],
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  ColorsPalette.dark,
-                  ColorsPalette.background,
-                ])),
+          borderRadius: BorderRadius.circular(responsive.dp(50)),
+          boxShadow: [
+            BoxShadow(
+              color: ColorsPalette.primary.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 8,
+            )
+          ],
+          color: ColorsPalette.dark.withOpacity(0.97)
+        ),
       ),
       padding: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
