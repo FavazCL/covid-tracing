@@ -2,7 +2,6 @@ import 'package:covid_app/src/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class CircularPainter extends CustomPainter {
-
   double _sigma = 4;
 
   @override

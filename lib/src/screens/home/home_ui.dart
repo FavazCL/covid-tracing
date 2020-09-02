@@ -58,6 +58,7 @@ class HomeUI extends StatelessWidget {
                 child: Hero(
                     tag: 'scan',
                     child: ScanButton(
+                      text: 'ESCANEAR',
                       onPressed: () => Get.to(ScanUI()),
                     )),
               ),

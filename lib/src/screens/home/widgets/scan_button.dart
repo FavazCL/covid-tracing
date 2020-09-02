@@ -3,8 +3,9 @@ import 'package:covid_app/src/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class ScanButton extends StatelessWidget {
+  final String text;
   final VoidCallback onPressed;
-  const ScanButton({Key key, this.onPressed}) : super(key: key);
+  const ScanButton({Key key, this.onPressed, this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class ScanButton extends StatelessWidget {
         height: responsive.dp(25),
         width: responsive.dp(25),
         alignment: Alignment.center,
-        child: Text('ESCANEAR',
+        child: Text(this.text,
         textAlign: TextAlign.center,
             style: TextStyle(
                 fontWeight: FontWeight.bold,
