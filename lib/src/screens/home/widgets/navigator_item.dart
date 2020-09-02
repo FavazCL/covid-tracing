@@ -26,7 +26,8 @@ class NavigatorItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(this.path, width: responsive.dp(4)),
+              SvgPicture.asset(this.path, width: responsive.dp(3.5)),
+              SizedBox(height: responsive.dp(0.5)),
               Text(this.title, style: TextStyle(fontWeight: FontWeight.w600))
             ],
           )),
