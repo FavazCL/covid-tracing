@@ -1,4 +1,5 @@
 import 'package:covid_app/src/screens/home/widgets/bottom_navigator.dart';
+import 'package:covid_app/src/screens/home/widgets/circular_painter.dart';
 import 'package:covid_app/src/screens/home/widgets/header_painter.dart';
 import 'package:covid_app/src/screens/home/widgets/scan_button.dart';
 import 'package:covid_app/src/screens/home/widgets/scan_ui.dart';
@@ -32,6 +33,13 @@ class HomeUI extends StatelessWidget {
                   painter: HeaderPainter(),
                 ),
               ),
+              Container(
+                height: double.infinity,
+                width: double.infinity,
+                child: CustomPaint(
+                  painter: CircularPainter(),
+                ),
+              ),
               Positioned(
                 top: responsive.dp(2),
                 child: Container(
@@ -48,9 +56,34 @@ class HomeUI extends StatelessWidget {
                 top: responsive.dp(15),
                 left: responsive.dp(10),
                 child: Hero(
-                  tag: 'scan', 
-                  child: ScanButton(
-                    onPressed: () => Get.to(ScanUI()),
+                    tag: 'scan',
+                    child: ScanButton(
+                      onPressed: () => Get.to(ScanUI()),
+                    )),
+              ),
+              Positioned(
+                top: responsive.dp(1.0),
+                right: responsive.dp(1),
+                child: Container(
+                  child: IconButton(
+                    iconSize: responsive.dp(2.5),
+                    icon: Icon(Icons.notifications_active, color: ColorsPalette.secundary), 
+                    onPressed: () {
+                      print('To do..');
+                    }
+                  )
+                ),
+              ),
+              Positioned(
+                top: responsive.dp(1),
+                left: responsive.dp(1),
+                child: Container(
+                  child: IconButton(
+                    iconSize: responsive.dp(2.5),
+                    icon: Icon(Icons.settings, color: ColorsPalette.secundary), 
+                    onPressed: () {
+                      print('To do..');
+                    }
                   )
                 ),
               ),

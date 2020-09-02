@@ -27,7 +27,7 @@ class ScanButton extends StatelessWidget {
             BoxShadow(
               color: ColorsPalette.primary.withOpacity(0.5),
               spreadRadius: 1,
-              blurRadius: 8,
+              blurRadius: 4,
             )
           ],
           color: ColorsPalette.dark.withOpacity(0.97)
