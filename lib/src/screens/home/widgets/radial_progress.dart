@@ -1,12 +1,16 @@
 import 'dart:math';
 import 'package:covid_app/src/utils/colors.dart';
+import 'package:covid_app/src/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class RadialProgress extends CustomPainter {
-  final double porcentaje, sigma, opacity;
+  final double porcentaje, sigma, opacity, radius;
+  final Responsive responsive;
 
   RadialProgress(
-      {@required this.opacity,
+      {@required this.radius,
+      @required this.responsive,
+      @required this.opacity,
       @required this.sigma,
       @required this.porcentaje});
 
@@ -27,8 +31,9 @@ class RadialProgress extends CustomPainter {
     paintArco.strokeCap = StrokeCap.round;
     paint.maskFilter = MaskFilter.blur(BlurStyle.normal, sigma);
 
+    // Offset center = Offset(responsive.dp(13.8), responsive.dp(14));
     Offset center = Offset(size.width / 2, size.height / 2);
-    double radio = min(size.width / 2, size.height / 2);
+    double radio = min(responsive.dp(radius), responsive.dp(radius));
     double arcAngle = 2 * pi * (porcentaje / 100);
 
     canvas.drawCircle(center, radio, paint);

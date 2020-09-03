@@ -1,7 +1,12 @@
 import 'package:covid_app/src/utils/colors.dart';
+import 'package:covid_app/src/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class CircularPainter extends CustomPainter {
+  final Responsive responsive;
+
+  CircularPainter({@required this.responsive});
+
   double _sigma = 4;
 
   @override
@@ -14,8 +19,8 @@ class CircularPainter extends CustomPainter {
     lapiz.maskFilter = MaskFilter.blur(BlurStyle.normal, _sigma);
 
     canvas.drawCircle(
-      Offset(size.width * 0.49, size.height * 0.306),
-      size.width * 0.30,
+      Offset(responsive.dp(22.5), responsive.dp(25.5)),
+      responsive.dp(13),
       lapiz
     );
     

@@ -37,7 +37,9 @@ class HomeUI extends StatelessWidget {
                 height: double.infinity,
                 width: double.infinity,
                 child: CustomPaint(
-                  painter: CircularPainter(),
+                  painter: CircularPainter(
+                    responsive: responsive
+                  ),
                 ),
               ),
               Positioned(
@@ -59,11 +61,12 @@ class HomeUI extends StatelessWidget {
                     tag: 'scan',
                     child: ScanButton(
                       text: 'ESCANEAR',
+                      scan: false,
                       onPressed: () => Get.to(ScanUI()),
                     )),
               ),
               Positioned(
-                top: responsive.dp(1.0),
+                top: responsive.dp(1),
                 right: responsive.dp(1),
                 child: Container(
                   child: IconButton(

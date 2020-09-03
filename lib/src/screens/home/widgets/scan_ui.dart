@@ -3,6 +3,8 @@ import 'package:covid_app/src/screens/home/widgets/circular_progress.dart';
 import 'package:covid_app/src/screens/home/widgets/scan_button.dart';
 import 'package:covid_app/src/utils/colors.dart';
 import 'package:covid_app/src/utils/responsive.dart';
+import 'package:covid_app/src/widgets/paragraph.dart';
+import 'package:covid_app/src/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,28 +26,48 @@ class ScanUI extends StatelessWidget {
                 child: Stack(
                   children: [
                     Positioned(
-                      top: responsive.dp(30.5),
-                      left: responsive.dp(9),
+                      top: responsive.dp(10),
                       child: Container(
-                          width: responsive.dp(28),
-                          height: responsive.dp(28),
-                          child: CircularProgress(sigma: 4, opacity: 0.8)),
+                        width: responsive.width,
+                        child: Text('FUNCIONANDO',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: responsive.dp(2.5),
+                                fontWeight: FontWeight.bold)),
+                      ),
                     ),
                     Positioned(
-                      top: responsive.dp(28.5),
-                      left: responsive.dp(7),
+                      top: responsive.dp(14),
                       child: Container(
-                          width: responsive.dp(32),
-                          height: responsive.dp(32),
-                          child: CircularProgress(sigma: 10, opacity: 0.12)),
+                          width: responsive.width,
+                          child: Paragraph(
+                            text:
+                                'El dispositivo esta enviando y recibiendo semillas.',
+                            color: Colors.white,
+                          )),
                     ),
+                    CircularProgress(sigma: 5, opacity: 0.4, radius: 12.5),
+                    CircularProgress(sigma: 10, opacity: 0.12, radius: 14.0),
                     Container(
                       alignment: Alignment.center,
                       child: Hero(
                         tag: 'scan',
                         child: ScanButton(
+                          scan: true,
                           text: 'ESCANEANDO',
                           onPressed: null,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: responsive.dp(10),
+                      left: responsive.dp(13),
+                      child: Container(
+                        child: RoundedButton(
+                          onPressed: () {},
+                          text: 'DETENER',
+                          color: ColorsPalette.primary,
                         ),
                       ),
                     ),

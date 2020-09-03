@@ -1,11 +1,13 @@
 import 'dart:ui';
 
 import 'package:covid_app/src/screens/home/widgets/radial_progress.dart';
+import 'package:covid_app/src/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class CircularProgress extends StatefulWidget {
-  final double sigma, opacity;
-  CircularProgress({Key key, @required this.sigma, @required this.opacity})
+  final double sigma, opacity, radius;
+  CircularProgress(
+      {Key key, @required this.sigma, @required this.opacity, this.radius})
       : super(key: key);
 
   @override
@@ -38,23 +40,22 @@ class _CircularProgressState extends State<CircularProgress>
 
   @override
   Widget build(BuildContext context) {
+    final Responsive responsive = Responsive.of(context);
     controller.repeat();
 
     return Container(
+        height: responsive.height,
+        width: responsive.width,
         child: AnimatedBuilder(
             animation: controller,
-            child: CustomPaint(
-              painter: RadialProgress(
-                  porcentaje: porcentaje,
-                  sigma: widget.sigma,
-                  opacity: widget.opacity),
-            ),
             builder: (BuildContext context, Widget circle) {
               return CustomPaint(
                 painter: RadialProgress(
+                    responsive: responsive,
                     porcentaje: controller.value * 100,
                     sigma: widget.sigma,
-                    opacity: widget.opacity),
+                    opacity: widget.opacity,
+                    radius: widget.radius),
               );
             }));
   }
