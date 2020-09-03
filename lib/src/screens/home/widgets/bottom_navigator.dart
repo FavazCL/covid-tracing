@@ -1,6 +1,8 @@
 import 'package:covid_app/src/screens/home/widgets/navigator_item.dart';
+import 'package:covid_app/src/screens/report/report_ui.dart';
 import 'package:covid_app/src/utils/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 
 class BottomNavigator extends StatelessWidget {
   const BottomNavigator({Key key}) : super(key: key);
@@ -21,7 +23,7 @@ class BottomNavigator extends StatelessWidget {
                 title: 'Contactos',
                 path: 'assets/screens/home/notification.svg',
                 onPressed: () {
-                  print('1');
+                  // TO DO..
                 },
               )),
           Flexible(
@@ -29,9 +31,7 @@ class BottomNavigator extends StatelessWidget {
             child: NavigatorItem(
               title: 'Reportar',
               path: 'assets/screens/home/send.svg',
-              onPressed: () {
-                print('2');
-              },
+              onPressed: () => Get.to(ReportUI()),
             ),
           ),
           Flexible(
@@ -40,7 +40,7 @@ class BottomNavigator extends StatelessWidget {
                 title: 'Ayuda',
                 path: 'assets/screens/home/faq.svg',
                 onPressed: () {
-                  print('3');
+                  // TO DO..
                 },
               )),
         ],
