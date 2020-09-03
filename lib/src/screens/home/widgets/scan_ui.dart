@@ -55,7 +55,7 @@ class ScanUI extends StatelessWidget {
                         tag: 'scan',
                         child: ScanButton(
                           scan: true,
-                          text: 'ESCANEANDO',
+                          text: 'EMITIENDO',
                           onPressed: null,
                         ),
                       ),
@@ -65,7 +65,7 @@ class ScanUI extends StatelessWidget {
                       left: responsive.dp(13),
                       child: Container(
                         child: RoundedButton(
-                          onPressed: () {},
+                          onPressed: () => Get.back(),
                           text: 'DETENER',
                           color: ColorsPalette.primary,
                         ),
