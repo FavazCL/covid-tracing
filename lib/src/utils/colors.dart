@@ -7,4 +7,6 @@ class ColorsPalette {
   static final backgroundTwo = Color(0xff6A7CED);
   static final backgroundThree = Color(0xff8098FA);
   static final dark = Color(0xff08021F);
+  static final gray = Color(0xffB8BED0);
+  static final grayOpa = Color(0xffD4DBE9);
 }
