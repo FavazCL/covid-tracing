@@ -18,7 +18,7 @@ class Question extends StatelessWidget {
     return Container(
         margin: EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
-            color: ColorsPalette.gray, borderRadius: BorderRadius.circular(12)),
+            color: ColorsPalette.primary, borderRadius: BorderRadius.circular(12)),
         child: CustomTile(
           title: this.title,
           description: this.description,

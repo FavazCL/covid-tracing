@@ -21,10 +21,11 @@ class CustomTile extends StatelessWidget {
     return ExpansionTile(
       title: Text(this.title, style: TextStyle(
         fontWeight: FontWeight.bold,
-        color: Colors.black.withOpacity(0.8),
+        color: Colors.white.withOpacity(0.8),
         fontSize: responsive.dp(1.5)
       )),
-      children: [Box(text: this.description, color: ColorsPalette.grayOpa)],
+      leading: Icon(this.iconData),
+      children: [Box(text: this.description, color: ColorsPalette.dark.withOpacity(0.1))],
     );
   }
 }

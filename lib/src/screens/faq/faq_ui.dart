@@ -29,7 +29,7 @@ class FaqUI extends StatelessWidget {
                     style: TextStyle(
                         color: ColorsPalette.primary,
                         fontWeight: FontWeight.bold,
-                        fontSize: responsive.dp(3))),
+                        fontSize: responsive.dp(2.5))),
               ),
               Container(
                 height: responsive.dp(68),
@@ -49,35 +49,42 @@ class FaqUI extends StatelessWidget {
                             '¿Es necesario activar el GPS?',
                         description:
                             'No, aunque la activación de este mejora aun más la precisión del bluetooth.',
-                        iconData: Icons.bluetooth),
+                        iconData: Icons.location_on),
                     SizedBox(height: responsive.dp(2)),
                     Question(
                         title:
                             'El código para reportar no funciona',
                         description:
                             'Debes comunicarte con el soporte de la plataforma contacto@contacto.com',
-                        iconData: Icons.bluetooth),
+                        iconData: Icons.qr_code),
                     SizedBox(height: responsive.dp(2)),
                     Question(
                         title:
-                            '¿Si desactivo el bluetooth seguira funcionando?',
+                            '¿Es necesario tener la aplicación en primer plano para que funcione?',
                         description:
-                            'No, siempre debe estar activo si decea recibir o enviar semillas.',
-                        iconData: Icons.bluetooth),
+                            'No, al momento de cerrar la aplicación esta trabajará en segundo plano.',
+                        iconData: Icons.smartphone),
                     SizedBox(height: responsive.dp(2)),
                     Question(
                         title:
-                            '¿Si desactivo el bluetooth seguira funcionando?',
+                            '¿Esta aplicación tiene acceso mis fotos, archivos, etc?',
                         description:
-                            'No, siempre debe estar activo si decea recibir o enviar semillas.',
-                        iconData: Icons.bluetooth),
+                            'No, esta aplicación solo almacena las semillas en la memoria interna de la aplicación.',
+                        iconData: Icons.storage),
                     SizedBox(height: responsive.dp(2)),
                     Question(
                         title:
-                            '¿Si desactivo el bluetooth seguira funcionando?',
+                            '¿Esta aplicación expone mi información personal?',
                         description:
-                            'No, siempre debe estar activo si decea recibir o enviar semillas.',
-                        iconData: Icons.bluetooth),
+                            'No, solo emite una semilla encriptada que cambia cada día.',
+                        iconData: Icons.privacy_tip),
+                    SizedBox(height: responsive.dp(2)),
+                    Question(
+                        title:
+                            '¿Cuál es la información de contacto?',
+                        description:
+                            'Correo: contacto@correo.com \n Web: covidtracing.cl',
+                        iconData: Icons.info),
                     SizedBox(height: responsive.dp(2)),
                   ],
                 ),
