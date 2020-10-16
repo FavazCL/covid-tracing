@@ -1,7 +1,8 @@
-import 'package:covid_app/app/modules/intro/widgets/dots.dart';
-import 'package:covid_app/app/modules/intro/widgets/rectangle_button.dart';
-import 'package:covid_app/app/modules/intro/widgets/slides.dart';
 import 'package:flutter/material.dart';
+
+import 'local_widgets/dots.dart';
+import 'local_widgets/rectangle_button.dart';
+import 'local_widgets/slides.dart';
 
 class IntroUI extends StatelessWidget {
   const IntroUI({Key key}) : super(key: key);

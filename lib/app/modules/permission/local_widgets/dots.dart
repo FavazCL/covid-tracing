@@ -1,6 +1,6 @@
-import 'package:covid_app/app/modules/permission/widgets/dot.dart';
 import 'package:covid_app/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
+import 'dot.dart';
 
 class Dots extends StatelessWidget {
   const Dots({Key key}) : super(key: key);

@@ -37,6 +37,6 @@ class RectangleButton extends StatelessWidget {
   }
 
   void _verifyPermissions(SharedPrefs sharedPrefs) {
-    (sharedPrefs.permissions) ? Get.offNamed(AppRoutes.HOME) : Get.toNamed(AppRoutes.PERMISSION);
+    (sharedPrefs.permissions) ? Get.toNamed(AppRoutes.HOME) : Get.toNamed(AppRoutes.PERMISSION);
   }
 }

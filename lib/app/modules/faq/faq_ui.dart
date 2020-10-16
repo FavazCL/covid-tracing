@@ -1,8 +1,9 @@
 import 'package:covid_app/app/global_widgets/header.dart';
-import 'package:covid_app/app/modules/faq/widgets/question.dart';
 import 'package:covid_app/app/theme/color_theme.dart';
 import 'package:covid_app/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
+
+import 'local_widgets/question.dart';
 
 class FaqUI extends StatelessWidget {
   const FaqUI({Key key}) : super(key: key);

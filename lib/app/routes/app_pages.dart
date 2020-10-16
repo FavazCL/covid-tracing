@@ -1,5 +1,7 @@
 import 'package:covid_app/app/modules/faq/faq_binding.dart';
 import 'package:covid_app/app/modules/faq/faq_ui.dart';
+import 'package:covid_app/app/modules/home/home_binding.dart';
+import 'package:covid_app/app/modules/home/home_ui.dart';
 import 'package:covid_app/app/modules/intro/intro_binding.dart';
 import 'package:covid_app/app/modules/intro/intro_ui.dart';
 import 'package:covid_app/app/modules/permission/permission_binding.dart';
@@ -51,6 +53,11 @@ class AppPages {
       name: AppRoutes.SCAN,
       page: () => ScanUI(),
       binding: ScanBinding()
+    ),
+    GetPage(
+      name: AppRoutes.HOME,
+      page: () => HomeUI(),
+      binding: HomeBinding(),
     )
   ];
 }

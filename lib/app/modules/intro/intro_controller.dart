@@ -5,6 +5,12 @@ class IntroController extends GetxController {
 
   int get page => _page.value;
 
+  @override
+  void onClose() {
+    print('Close');
+    super.onClose();
+  }
+
   void changeSlide(int value) {
     _page.value = value;
   }

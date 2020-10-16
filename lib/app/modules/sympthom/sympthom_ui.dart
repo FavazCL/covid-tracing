@@ -1,10 +1,11 @@
 import 'package:covid_app/app/global_widgets/header.dart';
 import 'package:covid_app/app/global_widgets/paragraph.dart';
 import 'package:covid_app/app/global_widgets/rounded_button.dart';
-import 'package:covid_app/app/modules/sympthom/widgets/symp_card.dart';
 import 'package:covid_app/app/theme/color_theme.dart';
 import 'package:covid_app/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
+
+import 'local_widgets/symp_card.dart';
 
 class SympthomUI extends StatelessWidget {
   static const routeName = 'sympthom';

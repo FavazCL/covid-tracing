@@ -75,7 +75,7 @@ class PermissionController extends GetxController {
   void _verify() {
     if (this._location && this._notification && this._batery) {
       sharedPrefs.permissions = true;
-      Get.toNamed(AppRoutes.HOME);
+      Get.offAllNamed(AppRoutes.HOME);
     } else {
       print('aun no');
     }

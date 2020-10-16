@@ -3,10 +3,11 @@ import 'package:covid_app/app/global_widgets/image_header.dart';
 import 'package:covid_app/app/global_widgets/paragraph.dart';
 import 'package:covid_app/app/global_widgets/rounded_button.dart';
 import 'package:covid_app/app/global_widgets/simple_card.dart';
-import 'package:covid_app/app/modules/request/widgets/circle_button.dart';
 import 'package:covid_app/app/theme/color_theme.dart';
 import 'package:covid_app/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
+
+import 'local_widgets/circle_button.dart';
 
 class RequestUI extends StatefulWidget {
   static const routeName = 'request';

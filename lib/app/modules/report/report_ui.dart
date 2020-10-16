@@ -2,10 +2,11 @@ import 'package:covid_app/app/global_widgets/header.dart';
 import 'package:covid_app/app/global_widgets/image_header.dart';
 import 'package:covid_app/app/global_widgets/paragraph.dart';
 import 'package:covid_app/app/global_widgets/rounded_button.dart';
-import 'package:covid_app/app/modules/report/widgets/pin_text_field.dart';
 import 'package:covid_app/app/theme/color_theme.dart';
 import 'package:covid_app/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
+
+import 'local_widgets/pin_text_field.dart';
 
 class ReportUI extends StatelessWidget {
   static const routeName = 'report';
