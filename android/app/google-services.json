@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "21839118568",
+    "firebase_url": "https://covidcl.firebaseio.com",
+    "project_id": "covidcl",
+    "storage_bucket": "covidcl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21839118568:android:5b879c4cd7ff2822da495d",
+        "android_client_info": {
+          "package_name": "cl.favaz.covid_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21839118568-ns2seqdthbp6ib7904d59fi2c0fpbp1s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5gtnRVU9kaQnNheIgacuIq0HeW04Gvto"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21839118568-ns2seqdthbp6ib7904d59fi2c0fpbp1s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
