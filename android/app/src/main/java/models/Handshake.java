@@ -1,6 +1,6 @@
 package models;
 
-class Handshake {
+public class Handshake {
 
   private int id;
   private long timestamp;
