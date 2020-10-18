@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
 
 class Code {
@@ -7,9 +8,15 @@ class Code {
         @required this.value,
     });
 
-    final int id;
-    final bool available;
-    final String value;
+    String id;
+    bool available;
+    String value;
+
+    Code.fromDocumentSnapshot(DocumentSnapshot doc) {
+      id = doc.id;
+      available = doc["available"];
+      value = doc["value"];
+    }
 
     factory Code.fromJson(Map<String, dynamic> json) => Code(
         id: json["id"],
