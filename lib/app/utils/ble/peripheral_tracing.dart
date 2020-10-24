@@ -32,7 +32,7 @@ class PeripheralTracing extends SimulatedPeripheral {
                   convenienceName: "Temperature service")
             ]) {
               
-    scanInfo.localName = localName;
+    scanInfo = ScanInfo();
   }
 
   @override

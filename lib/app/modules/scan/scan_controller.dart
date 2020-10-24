@@ -5,8 +5,8 @@ import 'package:flutter_ble_lib/flutter_ble_lib.dart';
 
 class ScanController extends GetxController {
 
-  Blemulator blemulator = Blemulator();
-  BleManager bleManager = BleManager();
+  // Blemulator blemulator = Blemulator();
+  // BleManager bleManager = BleManager();
   BleManager bleManager2 = BleManager();
 
   @override
