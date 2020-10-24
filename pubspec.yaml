@@ -33,6 +33,9 @@ dependencies:
   permission_handler: ^5.0.1+1
   shared_preferences: ^0.5.10
   cloud_firestore: ^0.14.1+3
+  blemulator: ^1.1.3
+  flutter_ble_lib: ^2.3.0
+  
 
 dev_dependencies:
   flutter_test:
