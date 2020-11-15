@@ -5,9 +5,11 @@ import 'package:covid_app/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+// ignore: must_be_immutable
 class PinTextField extends StatelessWidget {
   PinTextField({Key key}) : super(key: key);
 
+  // ignore: close_sinks
   StreamController<ErrorAnimationType> errorController;
   final TextEditingController textEditingController = TextEditingController();
 

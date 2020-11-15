@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covid_app/app/data/providers/local/handshakes_api.dart';
 import 'package:covid_app/app/data/providers/local/seeds_api.dart';
 import 'package:covid_app/app/data/providers/remote/codes_api.dart';

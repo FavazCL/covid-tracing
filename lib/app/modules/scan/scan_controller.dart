@@ -1,6 +1,4 @@
-import 'package:covid_app/app/utils/ble/peripheral_tracing.dart';
 import 'package:get/state_manager.dart';
-import 'package:blemulator/blemulator.dart';
 import 'package:flutter_ble_lib/flutter_ble_lib.dart';
 
 class ScanController extends GetxController {

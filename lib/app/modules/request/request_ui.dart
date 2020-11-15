@@ -104,6 +104,7 @@ class _RequestUIState extends State<RequestUI> {
     );
   }
 
+  // ignore: unused_element
   Widget _conditions(Responsive responsive) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: responsive.dp(2)),
