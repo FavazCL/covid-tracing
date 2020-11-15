@@ -11,7 +11,7 @@ import android.graphics.Color;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
-import com.example.covid_tracing.MainActivity;
+import favaz.cl.covid_app.MainActivity;
 
 public class Notifications {
 
