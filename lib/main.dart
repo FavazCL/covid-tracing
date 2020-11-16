@@ -1,4 +1,5 @@
 import 'package:covid_app/app/modules/intro/intro_ui.dart';
+import 'package:covid_app/app/utils/shared_preferences/shared_prefs_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,10 @@ import 'app/modules/intro/intro_binding.dart';
 import 'app/routes/app_pages.dart';
 import 'app/utils/dependency_injection.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = new SharedPrefsController();
+  await prefs.loadPreferences();
   DependencyInjection.init();
   runApp(MyApp());
 }

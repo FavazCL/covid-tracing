@@ -2,7 +2,7 @@ import 'package:covid_app/app/modules/intro/intro_controller.dart';
 import 'package:covid_app/app/routes/app_routes.dart';
 import 'package:covid_app/app/theme/color_theme.dart';
 import 'package:covid_app/app/utils/responsive.dart';
-import 'package:covid_app/app/utils/shared_preferences/shared_prefs.dart';
+import 'package:covid_app/app/utils/shared_preferences/shared_prefs_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +14,7 @@ class RectangleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final IntroController introController = Get.find<IntroController>();
     final Responsive responsive = Responsive.of(context);
-    final SharedPrefs sharedPrefs = Get.put(SharedPrefs());
+    final SharedPrefsController sharedPrefs = Get.put(SharedPrefsController());
 
     return Obx(() {
       return Container(
@@ -36,7 +36,7 @@ class RectangleButton extends StatelessWidget {
     });
   }
 
-  void _verifyPermissions(SharedPrefs sharedPrefs) {
+  void _verifyPermissions(SharedPrefsController sharedPrefs) {
     (sharedPrefs.permissions) ? Get.toNamed(AppRoutes.HOME) : Get.toNamed(AppRoutes.PERMISSION);
   }
 }
