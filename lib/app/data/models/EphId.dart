@@ -9,7 +9,7 @@ class EphId {
 
   EphId.fromJson(Map<String, dynamic> json)
     : createdAt = json['createdAt'],
-      data = json['data'];
+      data = Uint8List.fromList(List<int>.from(json["data"].map((x) => x)));
 
   Map<String, dynamic> toJson() => {
     'createdAt': createdAt,
