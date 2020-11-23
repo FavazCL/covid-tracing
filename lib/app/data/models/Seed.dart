@@ -8,7 +8,7 @@ class Seed {
         @required this.seedList,
     });
 
-    final int createdAt;
+    final DateTime createdAt;
     final Uint8List seedList;
 
     factory Seed.fromJson(Map<String, dynamic> json) => Seed(

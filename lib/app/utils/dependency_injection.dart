@@ -4,10 +4,13 @@ import 'package:covid_app/app/data/providers/remote/codes_api.dart';
 import 'package:covid_app/app/data/repositories/local/handshakes_repository.dart';
 import 'package:covid_app/app/data/repositories/local/seeds_repository.dart';
 import 'package:covid_app/app/data/repositories/remote/codes_repository.dart';
+import 'package:covid_app/app/utils/crypto_controller.dart';
 import 'package:get/get.dart';
 
 class DependencyInjection {
   static void init() {
+    Get.put<CryptoController>(CryptoController());
+
     // Providers
     Get.put<HandshakesAPI>(HandshakesAPI());
     Get.put<SeedsAPI>(SeedsAPI());

@@ -7,7 +7,6 @@ class IntroController extends GetxController {
 
   @override
   void onClose() {
-    print('Close');
     super.onClose();
   }
 

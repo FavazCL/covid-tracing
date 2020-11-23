@@ -1,11 +1,11 @@
 import 'package:covid_app/app/global_widgets/error_dialog.dart';
 import 'package:covid_app/app/routes/app_routes.dart';
-import 'package:covid_app/app/utils/shared_preferences/shared_prefs.dart';
+import 'package:covid_app/app/utils/shared_preferences/shared_prefs_controller.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:get/get.dart';
 
 class PermissionController extends GetxController {
-  final SharedPrefs sharedPrefs = Get.put(SharedPrefs());
+  final SharedPrefsController sharedPrefs = Get.put(SharedPrefsController());
 
   RxInt _page = 0.obs;
   bool _location = false;
