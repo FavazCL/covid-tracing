@@ -30,13 +30,18 @@ class RectangleButton extends StatelessWidget {
                     color: introController.page == 3
                         ? Colors.white
                         : ColorsPalette.primary)),
-            onPressed: () =>
+            onPressed: () => 
                 introController.page == 3 ? _verifyPermissions(sharedPrefs) : null,
           ));
     });
   }
 
   void _verifyPermissions(SharedPrefsController sharedPrefs) {
-    (sharedPrefs.permissions) ? Get.toNamed(AppRoutes.HOME) : Get.toNamed(AppRoutes.PERMISSION);
+    if (sharedPrefs.permissions) {
+      Get.toNamed(AppRoutes.HOME);
+    } else {
+      sharedPrefs.intro = true; 
+      Get.toNamed(AppRoutes.PERMISSION);
+    }
   }
 }
