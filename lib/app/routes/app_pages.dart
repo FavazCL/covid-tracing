@@ -12,6 +12,8 @@ import 'package:covid_app/app/modules/request/request_binding.dart';
 import 'package:covid_app/app/modules/request/request_ui.dart';
 import 'package:covid_app/app/modules/scan/scan_binding.dart';
 import 'package:covid_app/app/modules/scan/scan_ui.dart';
+import 'package:covid_app/app/modules/splash/splash_binding.dart';
+import 'package:covid_app/app/modules/splash/splash_ui.dart';
 import 'package:covid_app/app/modules/sympthom/sympthom_binding.dart';
 import 'package:covid_app/app/modules/sympthom/sympthom_ui.dart';
 import 'package:get/get.dart';
@@ -58,6 +60,11 @@ class AppPages {
       name: AppRoutes.HOME,
       page: () => HomeUI(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.SPLASH,
+      page: () => SplashUI(),
+      binding: SplashBinding()
     )
   ];
 }

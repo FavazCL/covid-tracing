@@ -1,10 +1,10 @@
-import 'package:covid_app/app/modules/intro/intro_ui.dart';
+import 'package:covid_app/app/modules/splash/splash_binding.dart';
+import 'package:covid_app/app/modules/splash/splash_ui.dart';
 import 'package:covid_app/app/utils/shared_preferences/shared_prefs_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'app/modules/intro/intro_binding.dart';
 import 'app/routes/app_pages.dart';
 import 'app/utils/dependency_injection.dart';
 
@@ -32,8 +32,8 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'monse'     
       ),
-      home: IntroUI(),
-      initialBinding: IntroBinding(),
+      home: SplashUI(),
+      initialBinding: SplashBinding(),
       getPages: AppPages.pages,
     );
   }

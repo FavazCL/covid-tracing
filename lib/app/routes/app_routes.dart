@@ -7,4 +7,5 @@ class AppRoutes {
   static const REQUEST = "request";
   static const SYSMPTHOM = "sympthom";
   static const SCAN = "scan";
+  static const SPLASH = "splash";
 }
