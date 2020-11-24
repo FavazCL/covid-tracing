@@ -2,9 +2,11 @@ import 'package:covid_app/app/global_widgets/header.dart';
 import 'package:covid_app/app/global_widgets/image_header.dart';
 import 'package:covid_app/app/global_widgets/paragraph.dart';
 import 'package:covid_app/app/global_widgets/rounded_button.dart';
+import 'package:covid_app/app/routes/app_routes.dart';
 import 'package:covid_app/app/theme/color_theme.dart';
 import 'package:covid_app/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'local_widgets/pin_text_field.dart';
 
@@ -52,6 +54,7 @@ class ReportUI extends StatelessWidget {
                         RoundedButton(
                           text: 'VERIFICAR',
                           color: ColorsPalette.primary,
+                          onPressed: () {},
                         ),
                         SizedBox(height: responsive.dp(8)),
                         Paragraph(
@@ -63,6 +66,7 @@ class ReportUI extends StatelessWidget {
                         RoundedButton(
                           text: 'SOLICITAR AHORA',
                           color: Colors.redAccent,
+                          onPressed: () => Get.toNamed(AppRoutes.REQUEST),
                         ),
                       ],
                     ),
