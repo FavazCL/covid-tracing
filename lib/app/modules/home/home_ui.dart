@@ -71,9 +71,7 @@ class HomeUI extends StatelessWidget {
                           iconSize: responsive.dp(2.5),
                           icon: Icon(Icons.cloud_upload,
                               color: ColorsPalette.secundary),
-                          onPressed: (() {
-                            print('To do..');
-                          }))),
+                          onPressed: (() => Get.toNamed(AppRoutes.UPLOAD)))),
                 ),
                 Positioned(
                   top: responsive.dp(1),
