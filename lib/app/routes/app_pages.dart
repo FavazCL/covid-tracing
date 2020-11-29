@@ -16,6 +16,8 @@ import 'package:covid_app/app/modules/splash/splash_binding.dart';
 import 'package:covid_app/app/modules/splash/splash_ui.dart';
 import 'package:covid_app/app/modules/sympthom/sympthom_binding.dart';
 import 'package:covid_app/app/modules/sympthom/sympthom_ui.dart';
+import 'package:covid_app/app/modules/upload/upload_binding.dart';
+import 'package:covid_app/app/modules/upload/upload_ui.dart';
 import 'package:get/get.dart';
 import 'app_routes.dart';
 
@@ -66,5 +68,10 @@ class AppPages {
       page: () => SplashUI(),
       binding: SplashBinding()
     ),
+    GetPage(
+      name: AppRoutes.UPLOAD,
+      page: () => UploadUI(),
+      binding: UploadBinding(),
+    )
   ];
 }

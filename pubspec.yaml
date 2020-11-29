@@ -70,6 +70,7 @@ flutter:
     - assets/screens/alert/
     - assets/screens/home/
     - assets/screens/code/
+    - assets/screens/upload/
     - assets/animations/
 
   # An image asset can refer to one or more resolution-specific "variants", see

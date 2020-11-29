@@ -8,4 +8,5 @@ class AppRoutes {
   static const SYSMPTHOM = "sympthom";
   static const SCAN = "scan";
   static const SPLASH = "splash";
+  static const UPLOAD = "upload";
 }
