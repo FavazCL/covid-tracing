@@ -2,6 +2,7 @@ import 'package:covid_app/app/global_widgets/header.dart';
 import 'package:covid_app/app/global_widgets/image_header.dart';
 import 'package:covid_app/app/global_widgets/paragraph.dart';
 import 'package:covid_app/app/global_widgets/rounded_button.dart';
+import 'package:covid_app/app/modules/report/local_widgets/success_report.dart';
 import 'package:covid_app/app/modules/report/report_controller.dart';
 import 'package:covid_app/app/routes/app_routes.dart';
 import 'package:covid_app/app/theme/color_theme.dart';
@@ -60,7 +61,7 @@ class ReportUI extends StatelessWidget {
                             color: (_.display) ? ColorsPalette.primary : ColorsPalette.gray,
                             onPressed: () {
                               if (_.display) {
-                                print('Verificar work');
+                                Get.off(SuccessReportUI());
                               }
                             },
                           ),
