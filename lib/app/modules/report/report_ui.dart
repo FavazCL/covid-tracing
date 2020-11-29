@@ -47,7 +47,7 @@ class ReportUI extends StatelessWidget {
                           SizedBox(height: responsive.dp(2)),
                           ImageHeader(
                               path: 'assets/screens/report/messaging.svg',
-                              size: 28),
+                              size: responsive.dp(3)),
                           SizedBox(height: responsive.dp(5)),
                           Paragraph(
                               text:

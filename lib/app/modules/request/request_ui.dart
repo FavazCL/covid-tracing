@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:covid_app/app/global_widgets/header.dart';
 import 'package:covid_app/app/global_widgets/image_header.dart';
 import 'package:covid_app/app/global_widgets/paragraph.dart';
@@ -10,7 +8,6 @@ import 'package:covid_app/app/theme/color_theme.dart';
 import 'package:covid_app/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:image_picker/image_picker.dart';
 
 import 'local_widgets/circle_button.dart';
 
@@ -23,42 +20,12 @@ class RequestUI extends StatefulWidget {
 }
 
 class _RequestUIState extends State<RequestUI> {
-  var _checked = false;
-  var textImage = '';
-  final picker = ImagePicker();
-  File _image;
-
-  Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-
-    setState(() {
-      _image = File(pickedFile.path);
-
-      if (_image.path != null) {
-        final text = _image.path.split("/");
-        textImage = text.last;
-      }
-    });
-  }
-
-  Future takeImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
-
-    setState(() {
-      _image = File(pickedFile.path);
-
-      if (_image.path != null) {
-        final text = _image.path.split("/");
-        textImage = text.last;
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
 
     return GetBuilder<RequestController>(
+      id: 'request',
       builder: (_) => Scaffold(
         body: SingleChildScrollView(
           child: Container(
@@ -83,69 +50,86 @@ class _RequestUIState extends State<RequestUI> {
                         SizedBox(height: responsive.dp(2)),
                         ImageHeader(
                             path: 'assets/screens/request/going_up.svg',
-                            size: 28),
+                            size: responsive.dp(3)),
                         SizedBox(height: responsive.dp(5)),
                         Paragraph(
                             text:
-                                'Adjunta una imagen o toma una foto de tu certificado médico que acredite tu positividad.'),
+                                'Solicita un código adjuntando o tomando una foto de su certificado médico.', fontSize: 1.8),
                         SizedBox(height: responsive.dp(5)),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            CircleButton(
-                              path: 'assets/screens/request/icons/desktop.svg',
-                              sizeImage: 50,
-                              color: Color(0xffF0F0FF),
+                            Column(
+                              children: [
+                                CircleButton(
+                                  path: 'assets/screens/request/icons/desktop.svg',
+                                  sizeImage: 50,
+                                  color: Color(0xffF0F0FF),
+                                  onPressed: () => _.getImage(),
+                                ),
+                                SizedBox(height: responsive.hp(1)),
+                                Text('Adjuntar', style: TextStyle(fontSize: responsive.dp(1.5)))
+                              ],
                             ),
-                            CircleButton(
-                              path:
-                                  'assets/screens/request/icons/photography.svg',
-                              sizeImage: 50,
-                              color: Color(0xffF0F0FF),
-                            )
+                            Column(
+                              children: [
+                                CircleButton(
+                                  path:
+                                      'assets/screens/request/icons/photography.svg',
+                                  sizeImage: 50,
+                                  color: Color(0xffF0F0FF),
+                                  onPressed: () => _.takeImage(),
+                                ),
+                                SizedBox(height: responsive.hp(1)),
+                                Text('Tomar foto', style: TextStyle(fontSize: responsive.dp(1.5)))
+                              ],
+                            ),
                           ],
                         ),
-                        SizedBox(height: responsive.dp(5)),
-                        //Without Image
-                        SimpleCard(
-                          title: 'Aún no ha adjuntado la imagen.',
-                          subtitle: 'Nombre no definido.',
-                          colorCard: Colors.redAccent,
-                          trailing: Icons.warning,
-                          colorIcon: Colors.white,
-                        ),
-
-                        // With Image
-                        /*SimpleCard(
-                          title: 'Imagen adjuntada con éxito.',
-                          subtitle: 'nombre_archivo.jpg',
-                          colorCard: Colors.greenAccent,
-                          trailing: Icons.check,
-                          colorIcon: Colors.white,
-                        ),*/
+                        SizedBox(height: responsive.dp(4)),
+                        (!_.image)
+                            ? SimpleCard(
+                                title: 'Aún no ha adjuntado la imagen.',
+                                subtitle: 'Nombre no definido.',
+                                colorCard: Colors.redAccent,
+                                trailing: Icons.warning,
+                                colorIcon: Colors.white,
+                                colorTitle: Colors.white,
+                                colorSubtitle: Colors.white,
+                                overflow: false,
+                              )
+                            : SimpleCard(
+                                title: 'Imagen adjuntada con éxito.',
+                                subtitle: _.textImage,
+                                colorCard: Colors.greenAccent,
+                                trailing: Icons.check,
+                                colorIcon: Colors.white,
+                                overflow: true,
+                              ),
                         Container(
-                          padding: EdgeInsets.only(bottom: 20),
+                          padding: EdgeInsets.only(bottom: responsive.hp(2), left: responsive.wp(2)),
                           child: CheckboxListTile(
                             title: Text(
                               'Confirmo que el certificado no esta adulterado.',
+                              style: TextStyle(fontWeight: FontWeight.w600, fontSize: responsive.dp(1.4)),
                             ),
                             controlAffinity: ListTileControlAffinity.platform,
                             dense: true,
-                            value: _checked,
+                            value: _.checked,
                             onChanged: (bool value) {
-                              setState(() {
-                                _checked = value;
-                              });
+                              _.setChecked = value;
                             },
                             activeColor: Colors.green,
                           ),
                         ),
                         RoundedButton(
                           text: 'ENVIAR POR CORREO',
-                          color: ColorsPalette.primary,
+                          color: (_.file != null && _.checked)
+                              ? ColorsPalette.primary
+                              : ColorsPalette.gray,
                           onPressed: () {
-                            if (_checked && (_image != null)) {
-                              _.sendEmail(_image);
+                            if (_.checked && (_.file != null)) {
+                              _.sendEmail(_.file);
                             }
                           },
                         )
@@ -157,32 +141,6 @@ class _RequestUIState extends State<RequestUI> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  // ignore: unused_element
-  Widget _conditions(Responsive responsive) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: responsive.dp(2)),
-      child: CheckboxListTile(
-        title: Text(
-          'Confirmo que el certificado no esta adulterado.',
-          style: TextStyle(
-              fontFamily: 'monse',
-              fontWeight: FontWeight.w600,
-              fontSize: responsive.dp(1.3)),
-        ),
-        controlAffinity: ListTileControlAffinity.leading,
-        dense: true,
-        value: _checked,
-        activeColor: Colors.greenAccent,
-        secondary: Icon(Icons.sms_failed, color: Colors.redAccent),
-        onChanged: (bool value) {
-          setState(() {
-            _checked = value;
-          });
-        },
       ),
     );
   }
