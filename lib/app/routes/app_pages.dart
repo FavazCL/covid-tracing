@@ -65,6 +65,6 @@ class AppPages {
       name: AppRoutes.SPLASH,
       page: () => SplashUI(),
       binding: SplashBinding()
-    )
+    ),
   ];
 }

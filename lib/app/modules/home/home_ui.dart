@@ -69,7 +69,7 @@ class HomeUI extends StatelessWidget {
                   child: Container(
                       child: IconButton(
                           iconSize: responsive.dp(2.5),
-                          icon: Icon(Icons.notifications_active,
+                          icon: Icon(Icons.cloud_upload,
                               color: ColorsPalette.secundary),
                           onPressed: (() {
                             print('To do..');

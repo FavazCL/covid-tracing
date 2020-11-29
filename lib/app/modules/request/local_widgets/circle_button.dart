@@ -6,12 +6,13 @@ class CircleButton extends StatelessWidget {
   final String path;
   final double sizeImage, height, width;
   final Color color;
+  final VoidCallback onPressed;
   const CircleButton(
       {Key key,
       @required this.path,
       @required this.sizeImage,
       this.height = 8.5,
-      this.width = 8.5, @required this.color})
+      this.width = 8.5, @required this.color, this.onPressed})
       : super(key: key);
 
   @override
@@ -30,7 +31,7 @@ class CircleButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(90.0)
           ),
           elevation: 1,
-          onPressed: () {}
+          onPressed: this.onPressed
         )
       ),
     );

@@ -37,6 +37,8 @@ dependencies:
   encrypt:
   sqflite: ^1.3.1
   lottie: ^0.7.0+1
+  image_picker: ^0.6.7+14
+  flutter_email_sender: ^3.0.1
   
 dev_dependencies:
   flutter_test:
@@ -67,6 +69,7 @@ flutter:
     - assets/screens/error/
     - assets/screens/alert/
     - assets/screens/home/
+    - assets/screens/code/
     - assets/animations/
 
   # An image asset can refer to one or more resolution-specific "variants", see
