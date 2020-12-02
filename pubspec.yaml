@@ -39,6 +39,7 @@ dependencies:
   lottie: ^0.7.0+1
   image_picker: ^0.6.7+14
   flutter_email_sender: ^3.0.1
+  firebase_messaging: ^7.0.3
   
 dev_dependencies:
   flutter_test:
