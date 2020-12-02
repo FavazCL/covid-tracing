@@ -59,9 +59,9 @@ class ReportUI extends StatelessWidget {
                           RoundedButton(
                             text: 'VERIFICAR',
                             color: (_.display) ? ColorsPalette.primary : ColorsPalette.gray,
-                            onPressed: () {
+                            onPressed: () async {
                               if (_.display) {
-                                Get.off(SuccessReportUI());
+                                await _.reportCase();
                               }
                             },
                           ),

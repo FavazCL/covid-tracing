@@ -3,11 +3,13 @@ import 'package:covid_app/app/data/providers/local/fcm_api.dart';
 import 'package:covid_app/app/data/providers/local/handshakes_api.dart';
 import 'package:covid_app/app/data/providers/local/seeds_api.dart';
 import 'package:covid_app/app/data/providers/remote/codes_api.dart';
+import 'package:covid_app/app/data/providers/remote/report_api.dart';
 import 'package:covid_app/app/data/repositories/local/db_repository.dart';
 import 'package:covid_app/app/data/repositories/local/fcm_repository.dart';
 import 'package:covid_app/app/data/repositories/local/handshakes_repository.dart';
 import 'package:covid_app/app/data/repositories/local/seeds_repository.dart';
 import 'package:covid_app/app/data/repositories/remote/codes_repository.dart';
+import 'package:covid_app/app/data/repositories/remote/report_repository.dart';
 import 'package:covid_app/app/utils/crypto_controller.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
@@ -23,6 +25,7 @@ class DependencyInjection {
     Get.put<CodesAPI>(CodesAPI());
     Get.put<DBAPI>(DBAPI.db);
     Get.put<FCMApi>(FCMApi());
+    Get.put<ReportAPI>(ReportAPI());
 
     // Repositories
     Get.put<HandshakesRepository>(HandshakesRepository());
@@ -30,5 +33,6 @@ class DependencyInjection {
     Get.put<CodesRepository>(CodesRepository());
     Get.put<DBRepository>(DBRepository());
     Get.put<FCMRepository>(FCMRepository());
+    Get.put<ReportRepository>(ReportRepository());
   }
 }

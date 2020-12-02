@@ -25,7 +25,6 @@ class Code {
     );
 
     Map<String, dynamic> toJson() => {
-        "id": id,
         "available": available,
         "value": value,
     };
