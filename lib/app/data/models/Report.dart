@@ -1,15 +1,13 @@
-import 'EphId.dart';
-
 class Report {
 
-  DateTime reportDate;
-  EphId ephId;
+  int reportDate;
+  dynamic ephId;
 
   Report({ this.reportDate, this.ephId });
 
   Report.fromJson(Map<String, dynamic> json)
-    : reportDate = DateTime(json['createdAt']),
-      ephId = EphId.fromJson(json['EphId']);
+    : reportDate = json['createdAt'],
+      ephId = json['EphId'];
 
   Map<String, dynamic> toJson() => {
     'reportDate': reportDate,

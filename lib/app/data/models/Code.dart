@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:meta/meta.dart';
 
 class Code {
     Code({
-        @required this.id,
-        @required this.available,
-        @required this.value,
+        this.id,
+        this.available,
+        this.value,
     });
 
     String id;

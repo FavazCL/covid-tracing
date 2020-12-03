@@ -13,7 +13,6 @@ class Dot extends StatelessWidget {
   Widget build(BuildContext context) {
     final PermissionController permissionController =
         Get.find<PermissionController>();
-        print(permissionController);
     final Responsive responsive = Responsive.of(context);
 
     return Obx(() {

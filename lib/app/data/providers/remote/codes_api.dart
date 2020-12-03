@@ -6,7 +6,6 @@ class CodesAPI {
 
   Future<bool> updateCode({Code code}) async {
     try {
-      print('Code receibed: ${code.value}');
       final res = await _firestore
           .collection('codes')
           .limit(1)

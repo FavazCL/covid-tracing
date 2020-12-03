@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:covid_app/app/theme/color_theme.dart';
 import 'package:covid_app/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -51,7 +50,6 @@ class PinTextField extends StatelessWidget {
           errorAnimationController: errorController,
           controller: textEditingController,
           onCompleted: (value) {
-            print('complete');
             _.setDisplay = true;
             _.code.value = value.toUpperCase();
           },
