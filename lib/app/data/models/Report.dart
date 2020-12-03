@@ -1,7 +1,9 @@
+import 'package:covid_app/app/data/models/EphId.dart';
+
 class Report {
 
   int reportDate;
-  dynamic ephId;
+  EphId ephId;
 
   Report({ this.reportDate, this.ephId });
 
@@ -11,7 +13,7 @@ class Report {
 
   Map<String, dynamic> toJson() => {
     'reportDate': reportDate,
-    'ephId': ephId
+    'ephId': ephId.toJson()
   };
 
 }

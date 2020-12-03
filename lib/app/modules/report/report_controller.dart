@@ -5,6 +5,7 @@ import 'package:covid_app/app/data/models/Report.dart';
 import 'package:covid_app/app/data/repositories/remote/codes_repository.dart';
 import 'package:covid_app/app/data/repositories/remote/report_repository.dart';
 import 'package:covid_app/app/modules/report/local_widgets/success_report.dart';
+import 'package:covid_app/app/utils/crypto_controller.dart';
 import 'package:covid_app/app/utils/shared_preferences/shared_prefs_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -15,6 +16,8 @@ class ReportController extends GetxController {
   final CodesRepository _codesRepository = Get.find<CodesRepository>();
   final SharedPrefsController prefs =
       Get.put<SharedPrefsController>(SharedPrefsController());
+  final CryptoController _cryptoController =
+      Get.put<CryptoController>(CryptoController());
   Code _code = Code();
   Report _report = Report();
   bool _display = false;
@@ -37,10 +40,11 @@ class ReportController extends GetxController {
 
   Future<void> reportCase() async {
     final resCode = await _codesRepository.updateCode(code: code);
-    final ephId = jsonDecode(prefs.ephids);
 
     _report.reportDate = DateTime.now().millisecondsSinceEpoch;
-    _report.ephId = ephId;
+    _report.ephId = _cryptoController.ephId;
+    
+    print('Ephid: ${_report.ephId}');
 
     if (resCode) {
       final resReport = await _reportRepository.createReport(report: report);
