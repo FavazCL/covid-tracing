@@ -44,7 +44,7 @@ class CryptoController extends GetxController {
       _createEphId();
     } else {
       var decode = json.decode(prefs.ephids);
-
+      print('decode: $decode');
       for (var ephId in decode) {
         List<int> listInt = List.castFrom(ephId['data']);
         ephId['data'] = Uint8List.fromList(listInt);

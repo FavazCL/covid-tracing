@@ -7,9 +7,12 @@ var msgData;
 var payload;
 
 exports.newSubscriberNotification = functions.firestore
-    .document('report/{reportId}')
+    .document('reports/{reportId}')
     .onCreate((snap, context) => {
         msgData = snap.data();
+        console.log('MsgData: ' + msgData['reportDate']);
+        console.log('MsgData: ' + msgData['ephId']);
+
         payload = {
             "notification": {
                 "title": "Nuevo caso reportado.",
@@ -17,8 +20,8 @@ exports.newSubscriberNotification = functions.firestore
                 "sound": "default"
             },
             "data": {
-                "reportDate": msgData.reportDate,
-                "seed": msgData.seed
+                "reportDate": msgData['reportDate'].toString(),
+                "ephId": JSON.stringify(msgData['ephId'])
             }
         }
 
