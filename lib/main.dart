@@ -1,6 +1,7 @@
 import 'package:covid_app/app/modules/splash/splash_binding.dart';
 import 'package:covid_app/app/modules/splash/splash_ui.dart';
 import 'package:covid_app/app/utils/shared_preferences/shared_prefs_controller.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = new SharedPrefsController();
   await prefs.loadPreferences();
+  await Firebase.initializeApp();
   DependencyInjection.init();
   runApp(MyApp());
 }

@@ -22,7 +22,6 @@ class PermissionController extends GetxController {
   }
 
   Future<void> selectPermission(int type) async {
-    print(type);
     switch (type) {
       case 0:
         await _getLocation();

@@ -2,7 +2,6 @@ import 'package:covid_app/app/global_widgets/header.dart';
 import 'package:covid_app/app/global_widgets/image_header.dart';
 import 'package:covid_app/app/global_widgets/paragraph.dart';
 import 'package:covid_app/app/global_widgets/rounded_button.dart';
-import 'package:covid_app/app/modules/report/local_widgets/success_report.dart';
 import 'package:covid_app/app/modules/report/report_controller.dart';
 import 'package:covid_app/app/routes/app_routes.dart';
 import 'package:covid_app/app/theme/color_theme.dart';
@@ -56,15 +55,23 @@ class ReportUI extends StatelessWidget {
                           SizedBox(height: responsive.dp(5)),
                           PinTextField(),
                           SizedBox(height: responsive.dp(5)),
-                          RoundedButton(
-                            text: 'VERIFICAR',
-                            color: (_.display) ? ColorsPalette.primary : ColorsPalette.gray,
-                            onPressed: () {
-                              if (_.display) {
-                                Get.off(SuccessReportUI());
-                              }
-                            },
-                          ),
+                          (_.loading)
+                              ? CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      ColorsPalette.primary),
+                                )
+                              : RoundedButton(
+                                  text: 'VERIFICAR',
+                                  color: (_.display)
+                                      ? ColorsPalette.primary
+                                      : ColorsPalette.gray,
+                                  onPressed: () async {
+                                    if (_.display) {
+                                       _.setLoading = true;
+                                      await _.reportCase();
+                                    }
+                                  },
+                                ),
                           SizedBox(height: responsive.dp(8)),
                           Paragraph(
                             text: '¿No tienes un código?',

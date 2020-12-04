@@ -36,7 +36,7 @@ class SuccessReportUI extends StatelessWidget {
                             path: 'assets/screens/others/confirmed.svg',
                             size: responsive.dp(3)),
                         SizedBox(height: responsive.hp(5)),
-                        Paragraph(text: 'Gracias por reportar tu positividad, recuerda realizar tu cuarentena.'),
+                        Paragraph(text: 'Gracias por reportar tu diagnóstico, recuerda realizar tu cuarentena.'),
                         SizedBox(height: responsive.hp(8)),
                         RoundedButton(text: 'Apoyar estudio', onPressed: () => Get.toNamed(AppRoutes.UPLOAD), color: Colors.redAccent),
                         SizedBox(height: responsive.hp(5)),

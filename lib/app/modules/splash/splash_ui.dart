@@ -67,6 +67,7 @@ class _SplashUIState extends State<SplashUI> with TickerProviderStateMixin {
                             fontFamily: 'monse',
                             fontWeight: FontWeight.bold)),
                     SizedBox(height: responsive.hp(3)),
+                    
                     Lottie.asset('assets/animations/mask.json',
                         controller: _controller, onLoaded: (composition) {
                       _controller

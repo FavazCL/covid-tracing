@@ -50,12 +50,12 @@ class PinTextField extends StatelessWidget {
           errorAnimationController: errorController,
           controller: textEditingController,
           onCompleted: (value) {
-            print('complete');
             _.setDisplay = true;
+            _.code.value = value.toUpperCase();
           },
           onChanged: (value) {
-            print(value);
-            if (value.length < 5) {
+            value.trim();
+            if (value.length != 5) {
               _.setDisplay = false;
             }
           },
