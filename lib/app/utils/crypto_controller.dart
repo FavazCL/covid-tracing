@@ -1,9 +1,15 @@
 import 'dart:convert';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:covid_app/app/data/models/EphId.dart';
+import 'package:covid_app/app/data/models/Handshake.dart';
+import 'package:covid_app/app/data/models/Report.dart';
+import 'package:covid_app/app/data/repositories/local/db_repository.dart';
+import 'package:covid_app/app/theme/color_theme.dart';
 import 'package:covid_app/app/utils/shared_preferences/shared_prefs_controller.dart';
 import 'package:encrypt/encrypt.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
@@ -13,6 +19,7 @@ class CryptoController extends GetxController {
   static const String IVE = 'F0Wlnt0zTvcB6bHW';
   final SharedPrefsController prefs =
       Get.put<SharedPrefsController>(SharedPrefsController());
+  final DBRepository _dbRepository = Get.put<DBRepository>(DBRepository());
   EphId _ephId = EphId();
   List<EphId> _ephIds = List<EphId>();
 
@@ -110,6 +117,63 @@ class CryptoController extends GetxController {
 
     } catch (e) {
       print('Error on createEphid: $e');
+    }
+  }
+
+  void compareEphIds(Report report) async {
+    List<Handshake> _handshakes = await _dbRepository.getAllHandshakes();
+
+    // 0. Mensaje avisando que se esta analizando localmente el contacto.
+    Get.snackbar('Analizando...', '',
+        snackPosition: SnackPosition.TOP,
+        messageText: Text(
+            'Verificando si su dispotivo es un contacto estrecho.',
+            style: TextStyle(color: Colors.white)),
+        colorText: Colors.white,
+        icon: Icon(Icons.wifi_protected_setup, color: ColorsPalette.primary));
+
+    // 1. Obtener todos los handshakes locales que coinciden con el ephId reportado.
+    _handshakes = _handshakes.where(
+        (Handshake handshake) => handshake.ephId.data == report.ephId.data);
+
+    // 2. Filtramos y dejamos solo los de los últimos 14 días.
+    _handshakes = _handshakes.where((Handshake handshake) =>
+        DateTime.fromMillisecondsSinceEpoch(report.reportDate)
+            .difference(
+                DateTime.fromMillisecondsSinceEpoch(handshake.timestamp))
+            .inDays <=
+        14);
+
+    // 3. Filtramos y dejamos solo los que esten dentro del rango de 2 mts.
+    _handshakes = _handshakes.where((Handshake handshake) =>
+        pow(10, ((handshake.txPowerLevel - handshake.rssi) / (10 * 2))) < 2);
+
+    // 4. Filtramos y dejamos solo los que tuvieron un intervalo de tiempo mayor o igual a 15 min.
+    _handshakes.sort((a,b) => b.timestamp.compareTo(a.timestamp));
+    
+    var minutes = 0;
+    for (var i = _handshakes.length; i == 0; i--) {
+      var diff = DateTime.fromMillisecondsSinceEpoch(_handshakes[i].timestamp).difference(DateTime.fromMillisecondsSinceEpoch(_handshakes[i-1].timestamp));
+      minutes += diff.inMinutes;
+    }
+
+    // 5. Si se cumple se manda un mensaje avisando que es contacto estrecho o no.
+    if (minutes >= 15) {
+      Get.snackbar('Alerta de contacto estrecho!', '',
+        snackPosition: SnackPosition.TOP,
+        messageText: Text(
+            'Tu dispositivo detecto que tuviste un contacto estrecho con el diagnosticado, haz click aquí para ver los pasos a seguir.',
+            style: TextStyle(color: Colors.white)),
+        colorText: Colors.white,
+        icon: Icon(Icons.warning, color: Colors.redAccent));
+    } else {
+      Get.snackbar('Resultado del análisis', '',
+        snackPosition: SnackPosition.TOP,
+        messageText: Text(
+            'Tu dispositivo NO tuvo contacto con el diagnosticado, sigue cuidandote.',
+            style: TextStyle(color: Colors.white)),
+        colorText: Colors.white,
+        icon: Icon(Icons.check, color: Colors.greenAccent));
     }
   }
 }

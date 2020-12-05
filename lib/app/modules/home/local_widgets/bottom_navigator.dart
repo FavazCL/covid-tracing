@@ -1,7 +1,7 @@
 import 'package:covid_app/app/routes/app_routes.dart';
 import 'package:covid_app/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 
 import 'navigator_item.dart';
 
@@ -23,7 +23,7 @@ class BottomNavigator extends StatelessWidget {
               child: NavigatorItem(
                 title: 'Contactos',
                 path: 'assets/screens/home/notification.svg',
-                onPressed: () {},
+                onPressed: () => {},
               )),
           Flexible(
             flex: 1,

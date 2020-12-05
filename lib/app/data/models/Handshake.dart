@@ -1,3 +1,4 @@
+import 'package:covid_app/app/data/models/EphId.dart';
 import 'package:meta/meta.dart';
 
 class Handshake {
@@ -14,7 +15,7 @@ class Handshake {
 
     final int id;
     final int timestamp;
-    final dynamic ephId;
+    final EphId ephId;
     final int txPowerLevel;
     final int rssi;
     final String primaryPhy;
