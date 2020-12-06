@@ -23,7 +23,7 @@ class DependencyInjection {
     Get.put<HandshakesAPI>(HandshakesAPI());
     Get.put<SeedsAPI>(SeedsAPI());
     Get.put<CodesAPI>(CodesAPI());
-    Get.put<DBAPI>(DBAPI.db);
+    // Get.put<DBAPI>(DBAPI.db);
     Get.put<FCMApi>(FCMApi());
     Get.put<ReportAPI>(ReportAPI());
 
@@ -31,7 +31,7 @@ class DependencyInjection {
     Get.put<HandshakesRepository>(HandshakesRepository());
     Get.put<SeedsRepository>(SeedsRepository());
     Get.put<CodesRepository>(CodesRepository());
-    Get.put<DBRepository>(DBRepository());
+    // Get.put<DBRepository>(DBRepository());
     Get.put<FCMRepository>(FCMRepository());
     Get.put<ReportRepository>(ReportRepository());
   }

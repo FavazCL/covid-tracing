@@ -19,7 +19,7 @@ class CryptoController extends GetxController {
   static const String IVE = 'F0Wlnt0zTvcB6bHW';
   final SharedPrefsController prefs =
       Get.put<SharedPrefsController>(SharedPrefsController());
-  final DBRepository _dbRepository = Get.put<DBRepository>(DBRepository());
+  // final DBRepository _dbRepository = Get.put<DBRepository>(DBRepository());
   EphId _ephId = EphId();
   List<EphId> _ephIds = List<EphId>();
 
@@ -121,7 +121,42 @@ class CryptoController extends GetxController {
   }
 
   void compareEphIds(Report report) async {
-    List<Handshake> _handshakes = await _dbRepository.getAllHandshakes();
+    // List<Handshake> _handshakes = await _dbRepository.getAllHandshakes();
+    List<Handshake> _handshakes = List<Handshake>();
+    Iterable<Handshake> _handshakesFiltered;
+    _handshakes.add(Handshake(
+        ephId: EphId(
+            createdAt: 1607184308935,
+            data: Uint8List.fromList([112, 253, 105, 7, 1, 12, 166, 32, 70, 101, 128, 77, 159, 232, 177, 35])),
+        id: 1,
+        rssi: -20,
+        txPowerLevel: -69,
+        timestamp: 1607184308935,
+        timestampNanos: 1607184308935,
+        primaryPhy: 'phy',
+        secondaryPhy: 'sec'));
+    _handshakes.add(Handshake(
+        ephId: EphId(
+            createdAt: 1607184408935,
+            data: Uint8List.fromList([112, 253, 105, 7, 1, 12, 166, 32, 70, 101, 128, 77, 159, 232, 177, 35])),
+        id: 1,
+        rssi: -15,
+        txPowerLevel: -69,
+        timestamp: 1607184408935,
+        timestampNanos: 1607184408935,
+        primaryPhy: 'phy',
+        secondaryPhy: 'sec'));
+    _handshakes.add(Handshake(
+        ephId: EphId(
+            createdAt: 1607188408935,
+            data: Uint8List.fromList([112, 253, 105, 7, 1, 12, 166, 32, 70, 101, 128, 77, 159, 232, 177, 35])),
+        id: 1,
+        rssi: -30,
+        txPowerLevel: -69,
+        timestamp: 1607188408935,
+        timestampNanos: 1607188408935,
+        primaryPhy: 'phy',
+        secondaryPhy: 'sec'));
 
     // 0. Mensaje avisando que se esta analizando localmente el contacto.
     Get.snackbar('Analizando...', '',
@@ -130,50 +165,68 @@ class CryptoController extends GetxController {
             'Verificando si su dispotivo es un contacto estrecho.',
             style: TextStyle(color: Colors.white)),
         colorText: Colors.white,
+        showProgressIndicator: true,
+        progressIndicatorBackgroundColor: Colors.white,
+        progressIndicatorValueColor:
+            AlwaysStoppedAnimation<Color>(ColorsPalette.primary),
         icon: Icon(Icons.wifi_protected_setup, color: ColorsPalette.primary));
 
-    // 1. Obtener todos los handshakes locales que coinciden con el ephId reportado.
-    _handshakes = _handshakes.where(
-        (Handshake handshake) => handshake.ephId.data == report.ephId.data);
+    Future.delayed(Duration(seconds: 4), () {
+      // 1. Obtener todos los handshakes locales que coinciden con el ephId reportado.
+      _handshakesFiltered = _handshakes.where((Handshake handshake) =>
+          handshake.ephId.data.toString() == report.ephId.data.toString());
 
-    // 2. Filtramos y dejamos solo los de los últimos 14 días.
-    _handshakes = _handshakes.where((Handshake handshake) =>
-        DateTime.fromMillisecondsSinceEpoch(report.reportDate)
-            .difference(
-                DateTime.fromMillisecondsSinceEpoch(handshake.timestamp))
-            .inDays <=
-        14);
+      // 2. Filtramos y dejamos solo los de los últimos 14 días.
+      _handshakesFiltered = _handshakesFiltered.where((Handshake handshake) =>
+          DateTime.fromMillisecondsSinceEpoch(report.reportDate)
+              .difference(
+                  DateTime.fromMillisecondsSinceEpoch(handshake.timestamp))
+              .inDays <=
+          14);
 
-    // 3. Filtramos y dejamos solo los que esten dentro del rango de 2 mts.
-    _handshakes = _handshakes.where((Handshake handshake) =>
-        pow(10, ((handshake.txPowerLevel - handshake.rssi) / (10 * 2))) < 2);
+      // 3. Filtramos y dejamos solo los que esten dentro del rango de 2 mts.
+      _handshakesFiltered = _handshakesFiltered.where((Handshake handshake) =>
+          pow(10, ((handshake.txPowerLevel - (handshake.rssi)) / (10 * 2))) <
+          2);
 
-    // 4. Filtramos y dejamos solo los que tuvieron un intervalo de tiempo mayor o igual a 15 min.
-    _handshakes.sort((a,b) => b.timestamp.compareTo(a.timestamp));
-    
-    var minutes = 0;
-    for (var i = _handshakes.length; i == 0; i--) {
-      var diff = DateTime.fromMillisecondsSinceEpoch(_handshakes[i].timestamp).difference(DateTime.fromMillisecondsSinceEpoch(_handshakes[i-1].timestamp));
-      minutes += diff.inMinutes;
-    }
+      // 4. Filtramos y dejamos solo los que tuvieron un intervalo de tiempo mayor o igual a 15 min.
+      var _handshakesList = _handshakesFiltered.toList();
+      _handshakesList.sort((a, b) => b.timestamp.compareTo(a.timestamp));
 
-    // 5. Si se cumple se manda un mensaje avisando que es contacto estrecho o no.
-    if (minutes >= 15) {
-      Get.snackbar('Alerta de contacto estrecho!', '',
-        snackPosition: SnackPosition.TOP,
-        messageText: Text(
-            'Tu dispositivo detecto que tuviste un contacto estrecho con el diagnosticado, haz click aquí para ver los pasos a seguir.',
-            style: TextStyle(color: Colors.white)),
-        colorText: Colors.white,
-        icon: Icon(Icons.warning, color: Colors.redAccent));
-    } else {
-      Get.snackbar('Resultado del análisis', '',
-        snackPosition: SnackPosition.TOP,
-        messageText: Text(
-            'Tu dispositivo NO tuvo contacto con el diagnosticado, sigue cuidandote.',
-            style: TextStyle(color: Colors.white)),
-        colorText: Colors.white,
-        icon: Icon(Icons.check, color: Colors.greenAccent));
-    }
+      var minutes = 0;
+      for (var i = 0; i < _handshakesList.length; i++) {
+        if (i + 1 < _handshakesList.length) {
+          var diff =
+              DateTime.fromMillisecondsSinceEpoch(_handshakesList[i].timestamp)
+                  .difference(DateTime.fromMillisecondsSinceEpoch(
+                      _handshakesList[i + 1].timestamp));
+          minutes += diff.inMinutes;
+        }
+      }
+
+      // 5. Si se cumple se manda un mensaje avisando que es contacto estrecho o no.
+      if (minutes >= 15) {
+        // Crear y almacenar localmente un nuevo contacto.
+        // TO DO..
+        
+        // Notificar alerta de contacto estrecho
+        Get.snackbar('Alerta de contacto estrecho!', '',
+            snackPosition: SnackPosition.TOP,
+            messageText: Text(
+                'Tu dispositivo detecto que tuviste un contacto estrecho con el diagnosticado, haz click aquí para ver los pasos a seguir.',
+                style: TextStyle(color: Colors.white)),
+            colorText: Colors.white,
+            onTap: (_) => print('Click: $_'),
+            icon: Icon(Icons.warning, color: Colors.redAccent));
+      } else {
+        Get.snackbar('Resultado del análisis', '',
+            snackPosition: SnackPosition.TOP,
+            messageText: Text(
+                'Tu dispositivo NO tuvo contacto con el diagnosticado, sigue cuidandote.',
+                style: TextStyle(color: Colors.white)),
+            colorText: Colors.white,
+            icon: Icon(Icons.check, color: Colors.greenAccent));
+      }
+    });
   }
 }
