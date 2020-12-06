@@ -17,7 +17,8 @@ exports.newSubscriberNotification = functions.firestore
             "notification": {
                 "title": "Nuevo caso reportado.",
                 "body": "Verifica si estuviste en contacto con esta persona.",
-                "sound": "default"
+                "sound": "default",
+                "click_action": "FLUTTER_NOTIFICATION_CLICK"
             },
             "data": {
                 "reportDate": msgData['reportDate'].toString(),
