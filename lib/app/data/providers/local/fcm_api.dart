@@ -19,27 +19,7 @@ class FCMApi {
     _messaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         try {
-          // 0. Parseamos los string a objectos.
-          message['data']['ephId'] = json.decode(message['data']['ephId']);
-          message['data']['reportDate'] =
-              int.parse(message['data']['reportDate']);
-          _report = Report.fromJson(message['data']);
-
-          // 1. Veritificar que el ephId recibido no sea del emisor.
-          var emisor = false;
-          var decode = json.decode(_prefs.ephids);
-          for (var ephId in decode) {
-            if (_report.ephId.data.toString() == ephId['data'].toString()) {
-              emisor = !emisor;
-              break;
-            }
-          }
-          print('emisor: $emisor');
-
-          if (!emisor) {
-            // 2. Caso que no sea del emisor, se empieza la verificación.
-            _cryptoController.compareEphIds(_report);
-          }
+          compareMethod(message);
         } catch (e) {
           print('Error on onMessage: $e');
         }
@@ -49,9 +29,32 @@ class FCMApi {
         print("onLaunch: $message");
       },
       onResume: (Map<String, dynamic> message) async {
-        print("onResume: $message");
+        try {
+          compareMethod(message);
+        } catch (e) {
+          print('Error onMessage: $e');
+        }
       },
     );
+  }
+
+  void compareMethod(Map<String, dynamic> message) {
+    message['data']['ephId'] = json.decode(message['data']['ephId']);
+    message['data']['reportDate'] = int.parse(message['data']['reportDate']);
+    _report = Report.fromJson(message['data']);
+
+    var emisor = false;
+    var decode = json.decode(_prefs.ephids);
+    for (var ephId in decode) {
+      if (_report.ephId.data.toString() == ephId['data'].toString()) {
+        emisor = !emisor;
+        break;
+      }
+    }
+
+    if (!emisor) {
+      _cryptoController.compareEphIds(_report);
+    }
   }
 
   void fcmSubscribe() {

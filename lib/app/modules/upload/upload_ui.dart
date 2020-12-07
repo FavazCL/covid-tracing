@@ -47,13 +47,13 @@ class _UploadUIState extends State<UploadUI> {
                         ImageHeader(
                             path: 'assets/screens/upload/secure_data.svg',
                             size: responsive.dp(2.5)),
-                        SizedBox(height: responsive.hp(2)),
+                        SizedBox(height: responsive.hp(3)),
                         Paragraph(
                             text:
-                                'Comparte la información de las semillas almacenadas en tu dispositivo con el fin de realizar estudios.'),
-                        SizedBox(height: responsive.hp(1)),
+                                'Comparte la información de los contactos almacenados en tu dispositivo.'),
+                        SizedBox(height: responsive.hp(3)),
                         Paragraph(
-                            text: 'La información de cada semilla contendrá:',
+                            text: 'La información de cada contacto contendrá:',
                             fontWeight: FontWeight.bold,
                             fontSize: 1.5),
                         SizedBox(height: responsive.hp(1)),
@@ -61,28 +61,21 @@ class _UploadUIState extends State<UploadUI> {
                           padding: EdgeInsets.symmetric(horizontal: responsive.wp(2)),
                           child: CardDetail(
                             icon: Icons.date_range,
-                            title: 'Fecha del día que se almacenó la semilla',
+                            title: 'Día que se genero el contacto',
                           )
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: responsive.wp(2)),
                           child: CardDetail(
-                            icon: Icons.flash_on,
-                            title: 'Nivel de potencia de la transmisión',
+                            icon: Icons.list_alt,
+                            title: 'Listado de semillas que coinciden con el diagnosticado',
                           )
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: responsive.wp(2)),
                           child: CardDetail(
-                            icon: Icons.wifi,
-                            title: 'Indicador de fuerza de la señal recibida',
-                          )
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: responsive.wp(2)),
-                          child: CardDetail(
-                            icon: Icons.signal_cellular_alt,
-                            title: 'Capa responsable de la transmisión',
+                            icon: Icons.timer,
+                            title: 'Duración del contacto',
                           )
                         ),
                         SizedBox(height: responsive.hp(2)),
@@ -91,7 +84,7 @@ class _UploadUIState extends State<UploadUI> {
                                 'Recuerda que no se compartirá información personal que te pueda identificar.',
                             fontWeight: FontWeight.bold,
                             fontSize: 1.5),
-                            SizedBox(height: responsive.hp(2)),
+                            SizedBox(height: responsive.hp(4)),
                             RoundedButton(text: 'Compartir', color: ColorsPalette.primary, onPressed: () {})
                       ],
                     ),
