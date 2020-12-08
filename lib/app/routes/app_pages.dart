@@ -1,3 +1,5 @@
+import 'package:covid_app/app/modules/contact/contact_binding.dart';
+import 'package:covid_app/app/modules/contact/contact_ui.dart';
 import 'package:covid_app/app/modules/faq/faq_binding.dart';
 import 'package:covid_app/app/modules/faq/faq_ui.dart';
 import 'package:covid_app/app/modules/home/home_binding.dart';
@@ -72,6 +74,11 @@ class AppPages {
       name: AppRoutes.UPLOAD,
       page: () => UploadUI(),
       binding: UploadBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.CONTACT,
+      page: () => ContactUI(),
+      binding: ContactBinding()
     )
   ];
 }

@@ -9,4 +9,5 @@ class AppRoutes {
   static const SCAN = "scan";
   static const SPLASH = "splash";
   static const UPLOAD = "upload";
+  static const CONTACT = "contact";
 }
