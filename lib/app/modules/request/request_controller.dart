@@ -1,20 +1,25 @@
 import 'dart:io';
 
-import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:covid_app/app/modules/request/local_widgets/success_request.dart';
+import 'package:date_format/date_format.dart';
+import 'package:dio/dio.dart' as dio;
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class RequestController extends GetxController {
+  final dio.Dio _dio = Get.find<dio.Dio>();
   ImagePicker picker = ImagePicker();
   File file;
-  Email email = Email();
   bool _image = false;
   bool _checked = false;
   String _textImage;
+  String _email;
 
   bool get image => _image;
   bool get checked => _checked;
   String get textImage => _textImage;
+  String get email => _email;
 
   set setImage(bool value) {
     _image = value;
@@ -26,23 +31,9 @@ class RequestController extends GetxController {
     update(['request']);
   }
 
-  void sendEmail(File _image) async {
-    email = Email(
-      body: 'Enviar código a este correo:',
-      subject: 'COVID-TRACING - SOLICITUD DE CÓDIGO',
-      recipients: ['favazcl@gmail.com'], // Correo del encargado
-      cc: ['lyn.cfontalba@gmail.com'], // Copia del correo
-      bcc: ['fvalvarez95@gmail.com'], // Copia oculta
-      attachmentPaths: [_image.path],
-      isHTML: false,
-    );
-
-    try {
-      await FlutterEmailSender.send(email);
-    } catch (e) {
-      print('Error on sendEmail: $e');
-    }
-    update(['request']);
+  set setEmail(String value) {
+    _email = value;
+    // update(['request']);
   }
 
   Future<void> getImage() async {
@@ -82,5 +73,30 @@ class RequestController extends GetxController {
     }
 
     update(['request']);
+  }
+
+  Future<void> requestCode() async {
+    try {
+      dio.FormData formData = dio.FormData.fromMap({
+        "dest": "favazcl@gmail.com", // Correo de la persona encargada
+        "email": email,
+        "rut": "11.111.111-1",
+        "date": formatDate(DateTime.now(), [dd, '-', mm, '-', yyyy, ' a las ', HH, ':', nn, ':', ss]),
+        "certificate": file
+      });
+
+      final res = await _dio.post('/sendMail', data: formData);
+      print('response: ${res.statusCode}');
+      if (res.statusCode == 200) {
+        Get.off(SuccessRequestUI());
+      } else {
+         Get.snackbar('Error de solicitud de código', '',
+           snackPosition: SnackPosition.TOP,
+           messageText: Text('Hubo un error con la conexión del servidor, intente nuevamente.'),
+           icon: Icon(Icons.warning, color: Colors.redAccent));
+      }
+    } catch (e) {
+      print('Error on requestCode: $e');
+    }
   }
 }

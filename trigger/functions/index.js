@@ -113,8 +113,6 @@ exports.sendMail = functions.https.onRequest((req, res) => {
                     res.status(200).end();
                 }
             });
-
-            // res.status(statusCode).end();
         });
 
         busboy.on('error', (error) => {

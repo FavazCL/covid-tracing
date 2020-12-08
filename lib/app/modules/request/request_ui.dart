@@ -3,10 +3,12 @@ import 'package:covid_app/app/global_widgets/image_header.dart';
 import 'package:covid_app/app/global_widgets/paragraph.dart';
 import 'package:covid_app/app/global_widgets/rounded_button.dart';
 import 'package:covid_app/app/global_widgets/simple_card.dart';
+import 'package:covid_app/app/modules/request/local_widgets/success_request.dart';
 import 'package:covid_app/app/modules/request/request_controller.dart';
 import 'package:covid_app/app/theme/color_theme.dart';
 import 'package:covid_app/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 import 'local_widgets/circle_button.dart';
@@ -47,28 +49,53 @@ class _RequestUIState extends State<RequestUI> {
                     width: responsive.width,
                     child: Column(
                       children: [
-                        SizedBox(height: responsive.dp(2)),
+                        SizedBox(height: responsive.dp(2.5)),
                         ImageHeader(
                             path: 'assets/screens/request/going_up.svg',
-                            size: responsive.dp(3)),
-                        SizedBox(height: responsive.dp(5)),
+                            size: responsive.dp(2)),
+                        SizedBox(height: responsive.dp(2)),
                         Paragraph(
                             text:
-                                'Solicita un código adjuntando o tomando una foto de su certificado médico.', fontSize: 1.8),
-                        SizedBox(height: responsive.dp(5)),
+                                'Solicita un código adjuntando o tomando una foto de tu certificado médico, el que se enviará al correo ingresado.',
+                            fontSize: 1.8),
+                        SizedBox(height: responsive.dp(3)),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: responsive.wp(5)),
+                          child: TextField(
+                            onChanged: (value) => _.setEmail = value,
+                            decoration: InputDecoration(
+                                labelStyle:
+                                    TextStyle(color: ColorsPalette.primary),
+                                labelText: 'Correo',
+                                hintText: 'Ingrese su correo.',
+                                icon: Icon(Icons.mail_outline,
+                                    color: ColorsPalette.primary),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: ColorsPalette.primary)),
+                                border: OutlineInputBorder()),
+                          ),
+                        ),
+                        SizedBox(height: responsive.dp(2)),
+                        Divider(),
+                        SizedBox(height: responsive.dp(2)),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Column(
                               children: [
                                 CircleButton(
-                                  path: 'assets/screens/request/icons/desktop.svg',
+                                  path:
+                                      'assets/screens/request/icons/desktop.svg',
                                   sizeImage: 50,
                                   color: Color(0xffF0F0FF),
                                   onPressed: () => _.getImage(),
                                 ),
                                 SizedBox(height: responsive.hp(1)),
-                                Text('Adjuntar', style: TextStyle(fontSize: responsive.dp(1.5)))
+                                Text('Adjuntar',
+                                    style:
+                                        TextStyle(fontSize: responsive.dp(1.5)))
                               ],
                             ),
                             Column(
@@ -81,12 +108,14 @@ class _RequestUIState extends State<RequestUI> {
                                   onPressed: () => _.takeImage(),
                                 ),
                                 SizedBox(height: responsive.hp(1)),
-                                Text('Tomar foto', style: TextStyle(fontSize: responsive.dp(1.5)))
+                                Text('Tomar foto',
+                                    style:
+                                        TextStyle(fontSize: responsive.dp(1.5)))
                               ],
                             ),
                           ],
                         ),
-                        SizedBox(height: responsive.dp(4)),
+                        SizedBox(height: responsive.dp(2)),
                         (!_.image)
                             ? SimpleCard(
                                 title: 'Aún no ha adjuntado la imagen.',
@@ -107,11 +136,14 @@ class _RequestUIState extends State<RequestUI> {
                                 overflow: true,
                               ),
                         Container(
-                          padding: EdgeInsets.only(bottom: responsive.hp(2), left: responsive.wp(2)),
+                          padding: EdgeInsets.only(
+                              bottom: responsive.hp(2), left: responsive.wp(2)),
                           child: CheckboxListTile(
                             title: Text(
                               'Confirmo que el certificado no esta adulterado.',
-                              style: TextStyle(fontWeight: FontWeight.w600, fontSize: responsive.dp(1.4)),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: responsive.dp(1.4)),
                             ),
                             controlAffinity: ListTileControlAffinity.platform,
                             dense: true,
@@ -128,8 +160,10 @@ class _RequestUIState extends State<RequestUI> {
                               ? ColorsPalette.primary
                               : ColorsPalette.gray,
                           onPressed: () {
-                            if (_.checked && (_.file != null)) {
-                              _.sendEmail(_.file);
+                            if (_.checked &&
+                                (_.file != null) &&
+                                (_.email != null)) {
+                              _.requestCode();
                             }
                           },
                         )

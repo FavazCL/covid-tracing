@@ -11,6 +11,7 @@ import 'package:covid_app/app/data/repositories/local/seeds_repository.dart';
 import 'package:covid_app/app/data/repositories/remote/codes_repository.dart';
 import 'package:covid_app/app/data/repositories/remote/report_repository.dart';
 import 'package:covid_app/app/utils/crypto_controller.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 
@@ -18,6 +19,9 @@ class DependencyInjection {
   static void init() {
     Get.put<CryptoController>(CryptoController());
     Get.put<FirebaseMessaging>(FirebaseMessaging());
+    Get.put<Dio>(Dio(BaseOptions(
+      baseUrl: "https://us-central1-covidcl.cloudfunctions.net/",
+    )));
 
     // Providers
     Get.put<HandshakesAPI>(HandshakesAPI());
