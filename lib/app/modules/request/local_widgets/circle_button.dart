@@ -28,7 +28,7 @@ class CircleButton extends StatelessWidget {
           child: SvgPicture.asset(this.path,
           height: responsive.dp(this.sizeImage)),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(90.0)
+            borderRadius: BorderRadius.circular(12.0)
           ),
           elevation: 1,
           onPressed: this.onPressed

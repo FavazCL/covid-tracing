@@ -7,9 +7,11 @@ class Report {
 
   Report({ this.reportDate, this.ephId });
 
-  Report.fromJson(Map<String, dynamic> json)
-    : reportDate = json['createdAt'],
-      ephId = json['EphId'];
+  factory Report.fromJson(Map<dynamic, dynamic> json) => Report(
+    reportDate: json['reportDate'],
+      ephId: EphId.fromJson(json['ephId']
+    )
+  );
 
   Map<String, dynamic> toJson() => {
     'reportDate': reportDate,

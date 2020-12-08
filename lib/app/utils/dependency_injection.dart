@@ -11,6 +11,7 @@ import 'package:covid_app/app/data/repositories/local/seeds_repository.dart';
 import 'package:covid_app/app/data/repositories/remote/codes_repository.dart';
 import 'package:covid_app/app/data/repositories/remote/report_repository.dart';
 import 'package:covid_app/app/utils/crypto_controller.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 
@@ -18,12 +19,15 @@ class DependencyInjection {
   static void init() {
     Get.put<CryptoController>(CryptoController());
     Get.put<FirebaseMessaging>(FirebaseMessaging());
+    Get.put<Dio>(Dio(BaseOptions(
+      baseUrl: "https://us-central1-covidcl.cloudfunctions.net/",
+    )));
 
     // Providers
     Get.put<HandshakesAPI>(HandshakesAPI());
     Get.put<SeedsAPI>(SeedsAPI());
     Get.put<CodesAPI>(CodesAPI());
-    Get.put<DBAPI>(DBAPI.db);
+    // Get.put<DBAPI>(DBAPI.db);
     Get.put<FCMApi>(FCMApi());
     Get.put<ReportAPI>(ReportAPI());
 
@@ -31,7 +35,7 @@ class DependencyInjection {
     Get.put<HandshakesRepository>(HandshakesRepository());
     Get.put<SeedsRepository>(SeedsRepository());
     Get.put<CodesRepository>(CodesRepository());
-    Get.put<DBRepository>(DBRepository());
+    // Get.put<DBRepository>(DBRepository());
     Get.put<FCMRepository>(FCMRepository());
     Get.put<ReportRepository>(ReportRepository());
   }
