@@ -28,7 +28,8 @@ class BottomNavigator extends StatelessWidget {
               child: NavigatorItem(
                 title: 'Contactos',
                 path: 'assets/screens/home/notification.svg',
-                onPressed: () => _cryptoController.compareEphIds(Report(ephId: _cryptoController.ephId, reportDate: DateTime.now().millisecondsSinceEpoch)),
+                onPressed: () => Get.toNamed(AppRoutes.CONTACT)
+                // _cryptoController.compareEphIds(Report(ephId: _cryptoController.ephId, reportDate: DateTime.now().millisecondsSinceEpoch)),
               )),
           Flexible(
             flex: 1,
