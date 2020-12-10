@@ -8,6 +8,7 @@ import 'package:covid_app/app/modules/request/local_widgets/success_request.dart
 import 'package:covid_app/app/modules/request/request_controller.dart';
 import 'package:covid_app/app/theme/color_theme.dart';
 import 'package:covid_app/app/utils/responsive.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
@@ -51,16 +52,72 @@ class _ContactUIState extends State<ContactUI> {
                         SizedBox(height: responsive.dp(2.5)),
                         Paragraph(
                             text: '¿Qué es un contacto estrecho?',
-                            fontSize: 1.8,
+                            fontSize: 2,
                             fontWeight: FontWeight.w600),
                         SizedBox(height: responsive.dp(1)),
                         Paragraph(
-                          fontSize: 1.5,
+                            fontSize: 1.6,
                             text:
                                 'Se considera un contacto estrecho cuando se cumplen una serie de condiciones, una de ellas es haber estado en contacto con una persona diagnosticada de covid.'),
+                        SizedBox(height: responsive.dp(1)),
+                        Divider(thickness: 1),
+                        SizedBox(height: responsive.dp(1)),
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('NÚMERO DE CONTACTOS ESTRECHOS',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: responsive.dp(1.6),
+                                  )),
+                              SizedBox(width: responsive.wp(3)),
+                              Container(
+                                  padding: EdgeInsets.all(responsive.dp(1)),
+                                  decoration: BoxDecoration(
+                                      color: ColorsPalette.primary,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8))),
+                                  child: Text('16',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: responsive.dp(1.5),
+                                      )))
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: responsive.dp(1)),
+                        Container(
+                          height: responsive.hp(51),
+                          width: double.infinity,
+                          child: Scrollbar(
+                            child: ListView.builder(
+                              padding: EdgeInsets.zero,
+                              itemCount: _.contacts.length,
+                              itemBuilder: (context, index) {
+                                return SimpleCard(
+                                  title:
+                                      'Fecha del contacto: ${formatDate(DateTime.fromMillisecondsSinceEpoch(_.contacts[index].createdAt), [
+                                    dd,
+                                    '-',
+                                    mm,
+                                    '-',
+                                    yyyy
+                                  ])}',
+                                  subtitle:
+                                      'Duración del contacto: ${_.contacts[index].duration.toString()} Minutos',
+                                  trailing: Icons.healing,
+                                );
+                              },
+                            ),
+                          ),
+                        ),
                         SizedBox(height: responsive.dp(2)),
-                        Divider(),
-                        SizedBox(height: responsive.dp(2)),
+                        RoundedButton(
+                            text: 'Ver sintomas',
+                            color: ColorsPalette.primary,
+                            onPressed: () => Get.toNamed('sympthom'))
                       ],
                     ),
                   ),
