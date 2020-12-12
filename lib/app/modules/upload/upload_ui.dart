@@ -4,6 +4,7 @@ import 'package:covid_app/app/global_widgets/paragraph.dart';
 import 'package:covid_app/app/global_widgets/rounded_button.dart';
 import 'package:covid_app/app/modules/request/request_controller.dart';
 import 'package:covid_app/app/modules/upload/local_widgets/card_detail.dart';
+import 'package:covid_app/app/modules/upload/upload_controller.dart';
 import 'package:covid_app/app/theme/color_theme.dart';
 import 'package:covid_app/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,8 @@ class _UploadUIState extends State<UploadUI> {
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
 
-    return GetBuilder<RequestController>(
+    return GetBuilder<UploadController>(
+      id: 'upload',
       builder: (_) => Scaffold(
         body: SingleChildScrollView(
           child: Container(
@@ -58,34 +60,56 @@ class _UploadUIState extends State<UploadUI> {
                             fontSize: 1.5),
                         SizedBox(height: responsive.hp(1)),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: responsive.wp(2)),
-                          child: CardDetail(
-                            icon: Icons.date_range,
-                            title: 'Día que se genero el contacto',
-                          )
-                        ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: responsive.wp(2)),
+                            child: CardDetail(
+                              icon: Icons.date_range,
+                              title: 'Día que se genero el contacto',
+                            )),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: responsive.wp(2)),
-                          child: CardDetail(
-                            icon: Icons.list_alt,
-                            title: 'Listado de semillas que coinciden con el diagnosticado',
-                          )
-                        ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: responsive.wp(2)),
+                            child: CardDetail(
+                              icon: Icons.list_alt,
+                              title:
+                                  'Listado de semillas que coinciden con el diagnosticado',
+                            )),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: responsive.wp(2)),
-                          child: CardDetail(
-                            icon: Icons.timer,
-                            title: 'Duración del contacto',
-                          )
+                            padding: EdgeInsets.symmetric(
+                                horizontal: responsive.wp(2)),
+                            child: CardDetail(
+                              icon: Icons.timer,
+                              title: 'Duración del contacto',
+                            )),
+                        Container(
+                          padding: EdgeInsets.only(bottom: responsive.hp(1)),
+                          child: CheckboxListTile(
+                            title: Text(
+                              'Eliminar los contactos de mi dispositivo una vez compartidos.',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: responsive.dp(1.4)),
+                            ),
+                            controlAffinity: ListTileControlAffinity.platform,
+                            dense: true,
+                            value: _.delete,
+                            onChanged: (bool value) {
+                              _.setDelete = value;
+                            },
+                            activeColor: Colors.green,
+                          ),
                         ),
-                        SizedBox(height: responsive.hp(2)),
+                        SizedBox(height: responsive.hp(1)),
                         Paragraph(
                             text:
                                 'Recuerda que no se compartirá información personal que te pueda identificar.',
                             fontWeight: FontWeight.bold,
                             fontSize: 1.5),
-                            SizedBox(height: responsive.hp(4)),
-                            RoundedButton(text: 'Compartir', color: ColorsPalette.primary, onPressed: () {})
+                        SizedBox(height: responsive.hp(4)),
+                        RoundedButton(
+                            text: 'Compartir',
+                            color: ColorsPalette.primary,
+                            onPressed: () => _.uploadContacts())
                       ],
                     ),
                   ),

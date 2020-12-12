@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:covid_app/app/data/models/Code.dart';
 import 'package:covid_app/app/data/models/Report.dart';
 import 'package:covid_app/app/data/repositories/remote/codes_repository.dart';
@@ -44,8 +42,6 @@ class ReportController extends GetxController {
     _report.reportDate = DateTime.now().millisecondsSinceEpoch;
     _report.ephId = _cryptoController.ephId;
     
-    print('Ephid: ${_report.ephId}');
-
     if (resCode) {
       final resReport = await _reportRepository.createReport(report: report);
       if (resReport) {
