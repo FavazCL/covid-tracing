@@ -64,7 +64,7 @@ class ScanUI extends StatelessWidget {
                       left: responsive.dp(13),
                       child: Container(
                         child: RoundedButton(
-                          onPressed: () => Get.back(),
+                          onPressed: () => _.stopScan(),
                           text: 'DETENER',
                           color: ColorsPalette.primary,
                         ),
