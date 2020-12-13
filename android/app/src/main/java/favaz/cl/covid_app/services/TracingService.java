@@ -10,16 +10,17 @@ import android.os.PowerManager;
 import androidx.annotation.Nullable;
 
 import favaz.cl.covid_app.ble.Advertising;
-
+import favaz.cl.covid_app.ble.GattServer;
+import favaz.cl.covid_app.ble.Scanning;
 
 public class TracingService extends Service {
 
   private static final String TAG = "TracingService";
-
   private static final String KEY = "Ephid";
-  private Advertising advertising;
-  //private GattServer gattServer;
   private PowerManager.WakeLock wakeLock;
+  private Advertising advertising;
+  private GattServer gattServer;
+  private Scanning scanning;
 
   @Override
   public void onCreate() {
@@ -39,7 +40,8 @@ public class TracingService extends Service {
       byte[] res = intent.getByteArrayExtra(KEY);
 
       if (res != null) {
-        //startGattServer();
+        startGattServer();
+        startScanning();
         startAdvertising(res);
       } else {
         onDestroy();
@@ -53,7 +55,8 @@ public class TracingService extends Service {
   public void onDestroy() {
     super.onDestroy();
 
-    //stopGattServer();
+    stopGattServer();
+    stopScanning();
     stopAdvertising();
   }
 
@@ -62,7 +65,7 @@ public class TracingService extends Service {
   public IBinder onBind(Intent intent) {
     return null;
   }
-  /*
+
   private void startGattServer() {
     stopGattServer();
 
@@ -76,7 +79,7 @@ public class TracingService extends Service {
       gattServer = null;
     }
   }
-*/
+
   private void startAdvertising(byte[] ephid) {
     stopAdvertising();
 
@@ -96,6 +99,20 @@ public class TracingService extends Service {
     if (advertising != null) {
       advertising.stopAdvertising();
       advertising = null;
+    }
+  }
+
+  private void startScanning() {
+    stopScanning();
+
+    scanning = new Scanning(this);
+    scanning.startScanning();
+  }
+
+  private void stopScanning() {
+    if (scanning != null) {
+      scanning.stopScanning();
+      scanning = null;
     }
   }
 

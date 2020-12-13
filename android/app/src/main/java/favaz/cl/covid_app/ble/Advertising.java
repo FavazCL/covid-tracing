@@ -19,14 +19,13 @@ import androidx.annotation.RequiresApi;
 public class Advertising {
 
   private static final String TAG = "Advertising";
-
+  private AdvertisingSetCallback advertisingSetCallback;
   private BluetoothLeAdvertiser bluetoothLeAdvertiser;
+  private AdvertiseCallback advertiseCallback;
   private BluetoothManager bluetoothManager;
   private BluetoothAdapter bluetoothAdapter;
-  private AdvertiseCallback advertiseCallback;
-  private AdvertisingSetCallback advertisingSetCallback;
-  private Context context;
   public boolean compatible = false;
+  private Context context;
 
   public Advertising(Context context) {
     this.context = context;

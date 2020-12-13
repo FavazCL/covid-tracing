@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
@@ -16,12 +17,19 @@ import io.flutter.plugins.GeneratedPluginRegistrant;
 
 public class MainActivity extends FlutterActivity {
 
-  private static final String TAG = "MainActivity";
   private static final String CHANNEL = "dev/tracing";
+  private static final String TAG = "MainActivity";
   public static final int REQUEST_ENABLE_BT = 1;
+  private BluetoothAdapter bluetoothAdapter;
   private static final String KEY = "Ephid";
   private boolean running = false;
-  private BluetoothAdapter bluetoothAdapter;
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    // TODO implement BroadcastReceiver...
+  }
 
   @Override
   public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
