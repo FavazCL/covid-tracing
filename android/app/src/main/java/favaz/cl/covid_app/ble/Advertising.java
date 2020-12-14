@@ -149,7 +149,7 @@ public class Advertising {
     if (ephid.length > 16) {
       stopAdvertising(); // TO DO.. handling error.
     }
-
+    System.out.println("ephid: " + ephid);
     return ephid;
   }
 

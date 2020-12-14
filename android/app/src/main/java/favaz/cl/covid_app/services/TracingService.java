@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.PowerManager;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -25,10 +26,12 @@ public class TracingService extends Service {
   @Override
   public void onCreate() {
     super.onCreate();
+    Log.d(TAG, "actiate");
   }
 
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
+    Log.d(TAG, "onstartcommand");
     if (wakeLock == null) {
       PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
       wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
@@ -40,10 +43,12 @@ public class TracingService extends Service {
       byte[] res = intent.getByteArrayExtra(KEY);
 
       if (res != null) {
+        Log.d(TAG, "AVAILABLE");
         startGattServer();
         startScanning();
         startAdvertising(res);
       } else {
+        Log.d(TAG, "destroy");
         onDestroy();
       }
     }
