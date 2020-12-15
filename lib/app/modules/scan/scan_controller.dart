@@ -9,6 +9,7 @@ class ScanController extends GetxController {
       Get.put<CryptoController>(CryptoController());
 
   Future<void> startScan() async {
+    print('ephid a compartir: ${_cryptoController.ephId.data}');
     await platform.invokeMethod('start', <String, dynamic>{
       'data': _cryptoController.ephId.data
     });

@@ -6,7 +6,7 @@ class Contact {
   int createdAt;
   List<Handshake> handshakes;
   int duration;
-  bool shared;
+  int shared; // 0 False - 1 True
 
   Contact({ this.id, this.createdAt, this.handshakes, this.duration, this.shared });
 

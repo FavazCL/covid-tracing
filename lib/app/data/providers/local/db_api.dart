@@ -1,3 +1,4 @@
+import 'dart:convert';
 
 import 'package:covid_app/app/data/models/Contact.dart';
 import 'package:covid_app/app/data/models/Handshake.dart';
@@ -5,10 +6,10 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DBAPI {
-
   static Database _database;
   static final DBAPI db = DBAPI._();
-  final String path = '/data/user/0/covid_tracing/databases/';
+  // final String path = '/data/user/0/covid_tracing/databases/';
+  final String path = '';
 
   DBAPI._();
 
@@ -23,36 +24,41 @@ class DBAPI {
   initDB() async {
     final tempDir = await getDatabasesPath();
     final path = join(tempDir, 'covidapp.db');
-
+    print('path: $path');
     return await openDatabase(
       path,
       version: 1,
-      onOpen: (db) => {
-        print('open: ' + db.toString())
-      },
+      onOpen: (db) => {print('open: ' + db.toString())},
     );
   }
 
   // Handshakes
 
-  Future getAllHandshakes() async {
+  Future<List<Handshake>> getAllHandshakes() async {
+    List<Handshake> _handshakes = List<Handshake>();
     try {
       final db = await database;
-
       final res = await db.query('handshakes');
 
-      List<dynamic> list = res.isNotEmpty ? 
-      res.map((result) => Handshake.fromJson(result)).toList() : [];
-  
-      return list;
+      var list = res.isNotEmpty
+          ? await res.map((result) => Handshake.fromJson(result)).toList()
+          : [];
+
+      // Parse to Handshake list
+      for (Handshake handshake in list) {
+        _handshakes.add(handshake);
+      }
+
+      return _handshakes;
     } catch (e) {
       print('Error on getAllHandshakes: $e');
+      return [];
     }
   }
 
   Future getHandshakeById({int id}) async {
     final db = await database;
-    
+
     final res = await db.query('handshakes', where: 'id = ?', whereArgs: [id]);
 
     return res.isNotEmpty ? Handshake.fromJson(res.first) : null;
@@ -61,8 +67,9 @@ class DBAPI {
   Future updateHandshake({Handshake handshake}) async {
     final db = await database;
 
-    final res = await db.update('handshakes', handshake.toJson(), where: 'id = ?', whereArgs: [handshake.id]);
-    
+    final res = await db.update('handshakes', handshake.toJson(),
+        where: 'id = ?', whereArgs: [handshake.id]);
+
     return res;
   }
 
@@ -90,9 +97,10 @@ class DBAPI {
 
       final res = await db.query('contacts');
 
-      List<dynamic> list = res.isNotEmpty ? 
-      res.map((result) => Contact.fromJson(result)).toList() : [];
-  
+      List<dynamic> list = res.isNotEmpty
+          ? res.map((result) => Contact.fromJson(result)).toList()
+          : [];
+
       return list;
     } catch (e) {
       print(e);
@@ -100,25 +108,22 @@ class DBAPI {
     }
   }
 
-  Future createContact() async {
+  Future createContact({Contact contact}) async {
     try {
-      await database.transaction((txn) async {
-  int id1 = await txn.rawInsert(
-      'INSERT INTO Test(name, value, num) VALUES("some name", 1234, 456.789)');
-  print('inserted1: $id1');
-  int id2 = await txn.rawInsert(
-      'INSERT INTO Test(name, value, num) VALUES(?, ?, ?)',
-      ['another name', 12345678, 3.1416]);
-  print('inserted2: $id2');
-});
+      final db = await database;
+      await db.execute(
+          'CREATE TABLE IF NOT EXISTS contacts (id INTEGER PRIMARY KEY AUTOINCREMENT, createdAt INTEGER NOT NULL, handshakes TEXT NOT NULL, duration INTEGER NOT NULL, shared INTEGER NOT NULL)');
+      await db.rawInsert('INSERT INTO contacts(createdAt, handshakes, duration, shared) VALUES(?, ?, ?, ?)', [contact.createdAt, json.encode(contact.handshakes), contact.duration, contact.shared]);
+      return true;
     } catch (e) {
       print('Error on createContact: $e');
+      return false;
     }
   }
 
   Future getContactById({int id}) async {
     final db = await database;
-    
+
     final res = await db.query('contacts', where: 'id = ?', whereArgs: [id]);
 
     return res.isNotEmpty ? Contact.fromJson(res.first) : null;
@@ -127,8 +132,9 @@ class DBAPI {
   Future updateContact({Contact contact}) async {
     final db = await database;
 
-    final res = await db.update('contacs', contact.toJson(), where: 'id = ?', whereArgs: [contact.id]);
-    
+    final res = await db.update('contacs', contact.toJson(),
+        where: 'id = ?', whereArgs: [contact.id]);
+
     return res;
   }
 

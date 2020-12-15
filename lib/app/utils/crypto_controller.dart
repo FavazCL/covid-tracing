@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:covid_app/app/data/models/Contact.dart';
 import 'package:covid_app/app/data/models/EphId.dart';
 import 'package:covid_app/app/data/models/Handshake.dart';
 import 'package:covid_app/app/data/models/Report.dart';
@@ -19,7 +20,6 @@ class CryptoController extends GetxController {
   static const String IVE = 'F0Wlnt0zTvcB6bHW';
   final SharedPrefsController prefs =
       Get.put<SharedPrefsController>(SharedPrefsController());
-  // final DBRepository _dbRepository = Get.put<DBRepository>(DBRepository());
   EphId _ephId = EphId();
   List<EphId> _ephIds = List<EphId>();
 
@@ -70,7 +70,6 @@ class CryptoController extends GetxController {
     for (EphId ephId in ephIds) {
       var parseDate = DateTime.fromMillisecondsSinceEpoch(ephId.createdAt);
       int diffDays = currentDay.difference(parseDate).inDays;
-
       bool isSame = (diffDays == 0 && parseDate.day == currentDay.day);
 
       if (isSame) {
@@ -78,6 +77,7 @@ class CryptoController extends GetxController {
         _ephId = ephId;
       } else {
         print('No son iguales');
+        print('ephid: ${ephId.data}');
         _createEphId();
       }
     }
@@ -121,42 +121,9 @@ class CryptoController extends GetxController {
   }
 
   void compareEphIds(Report report) async {
-    // List<Handshake> _handshakes = await _dbRepository.getAllHandshakes();
-    List<Handshake> _handshakes = List<Handshake>();
+    final DBRepository _dbRepository = Get.put<DBRepository>(DBRepository());
+    List<Handshake> _handshakes = await _dbRepository.getAllHandshakes();
     Iterable<Handshake> _handshakesFiltered;
-    _handshakes.add(Handshake(
-        ephId: EphId(
-            createdAt: 1607184308935,
-            data: Uint8List.fromList([112, 253, 105, 7, 1, 12, 166, 32, 70, 101, 128, 77, 159, 232, 177, 35])),
-        id: 1,
-        rssi: -20,
-        txPowerLevel: -69,
-        timestamp: 1607184308935,
-        timestampNanos: 1607184308935,
-        primaryPhy: 'phy',
-        secondaryPhy: 'sec'));
-    _handshakes.add(Handshake(
-        ephId: EphId(
-            createdAt: 1607184408935,
-            data: Uint8List.fromList([112, 253, 105, 7, 1, 12, 166, 32, 70, 101, 128, 77, 159, 232, 177, 35])),
-        id: 1,
-        rssi: -15,
-        txPowerLevel: -69,
-        timestamp: 1607184408935,
-        timestampNanos: 1607184408935,
-        primaryPhy: 'phy',
-        secondaryPhy: 'sec'));
-    _handshakes.add(Handshake(
-        ephId: EphId(
-            createdAt: 1607188408935,
-            data: Uint8List.fromList([112, 253, 105, 7, 1, 12, 166, 32, 70, 101, 128, 77, 159, 232, 177, 35])),
-        id: 1,
-        rssi: -30,
-        txPowerLevel: -69,
-        timestamp: 1607188408935,
-        timestampNanos: 1607188408935,
-        primaryPhy: 'phy',
-        secondaryPhy: 'sec'));
 
     // 0. Mensaje avisando que se esta analizando localmente el contacto.
     Get.snackbar('Analizando...', '',
@@ -171,7 +138,7 @@ class CryptoController extends GetxController {
             AlwaysStoppedAnimation<Color>(ColorsPalette.primary),
         icon: Icon(Icons.wifi_protected_setup, color: ColorsPalette.primary));
 
-    Future.delayed(Duration(seconds: 4), () {
+    Future.delayed(Duration(seconds: 4), () async {
       // 1. Obtener todos los handshakes locales que coinciden con el ephId reportado.
       _handshakesFiltered = _handshakes.where((Handshake handshake) =>
           handshake.ephId.data.toString() == report.ephId.data.toString());
@@ -205,9 +172,15 @@ class CryptoController extends GetxController {
       }
 
       // 5. Si se cumple se manda un mensaje avisando que es contacto estrecho o no.
-      if (minutes >= 15) {
+      if (minutes >= 5) {
         // Crear y almacenar localmente un nuevo contacto.
-        // TO DO..
+        Contact _contact = Contact();
+        _contact.createdAt = DateTime.now().millisecondsSinceEpoch;
+        _contact.handshakes = _handshakesList;
+        _contact.duration = minutes;
+        _contact.shared = 0;
+
+        await _dbRepository.createContact(contact: _contact);
         
         // Notificar alerta de contacto estrecho
         Get.snackbar('Alerta de contacto estrecho!', '',

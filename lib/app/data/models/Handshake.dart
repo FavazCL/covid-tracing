@@ -25,7 +25,7 @@ class Handshake {
     factory Handshake.fromJson(Map<String, dynamic> json) => Handshake(
         id: json["id"],
         timestamp: json["timestamp"],
-        ephId: json["ephId"],
+        ephId: EphId.fromDB(json["ephID"]),
         txPowerLevel: json["txPowerLevel"],
         rssi: json["rssi"],
         primaryPhy: json["primaryPhy"],
