@@ -7,6 +7,7 @@ import 'package:covid_app/app/data/models/EphId.dart';
 import 'package:covid_app/app/data/models/Handshake.dart';
 import 'package:covid_app/app/data/models/Report.dart';
 import 'package:covid_app/app/data/repositories/local/db_repository.dart';
+import 'package:covid_app/app/routes/app_routes.dart';
 import 'package:covid_app/app/theme/color_theme.dart';
 import 'package:covid_app/app/utils/shared_preferences/shared_prefs_controller.dart';
 import 'package:encrypt/encrypt.dart';
@@ -189,7 +190,7 @@ class CryptoController extends GetxController {
                 'Tu dispositivo detecto que tuviste un contacto estrecho con el diagnosticado, haz click aquí para ver los pasos a seguir.',
                 style: TextStyle(color: Colors.white)),
             colorText: Colors.white,
-            onTap: (_) => print('Click: $_'),
+            onTap: (_) => Get.toNamed(AppRoutes.SYSMPTHOM),
             icon: Icon(Icons.warning, color: Colors.redAccent));
       } else {
         Get.snackbar('Resultado del análisis', '',

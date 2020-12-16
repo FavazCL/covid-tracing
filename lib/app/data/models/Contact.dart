@@ -1,10 +1,10 @@
-import 'package:covid_app/app/data/models/Handshake.dart';
+import 'dart:convert';
 
 class Contact {
 
-  String id;
+  int id;
   int createdAt;
-  List<Handshake> handshakes;
+  List<dynamic> handshakes;
   int duration;
   int shared; // 0 False - 1 True
 
@@ -12,8 +12,8 @@ class Contact {
 
   Contact.fromJson(Map<String, dynamic> json)
     : id = json['id'],
-      createdAt = json['date'],
-      handshakes = json['handshakes'],
+      createdAt = json['createdAt'],
+      handshakes = jsonDecode(json['handshakes']),
       duration = json['duration'],
       shared = json['shared'];
 

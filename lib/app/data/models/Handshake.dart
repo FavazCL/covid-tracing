@@ -26,11 +26,11 @@ class Handshake {
         id: json["id"],
         timestamp: json["timestamp"],
         ephId: EphId.fromDB(json["ephID"]),
-        txPowerLevel: json["txPowerLevel"],
+        txPowerLevel: json["tx_power_level"],
         rssi: json["rssi"],
-        primaryPhy: json["primaryPhy"],
-        secondaryPhy: json["secondaryPhy"],
-        timestampNanos: json["timestampNanos"],
+        primaryPhy: json["phy_primary"],
+        secondaryPhy: json["phy_secondary"],
+        timestampNanos: json["timestamp_nanos"],
     );
 
     Map<String, dynamic> toJson() => {

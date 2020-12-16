@@ -1,11 +1,9 @@
 import 'package:covid_app/app/global_widgets/header.dart';
-import 'package:covid_app/app/global_widgets/image_header.dart';
 import 'package:covid_app/app/global_widgets/paragraph.dart';
 import 'package:covid_app/app/global_widgets/rounded_button.dart';
 import 'package:covid_app/app/global_widgets/simple_card.dart';
 import 'package:covid_app/app/modules/contact/contact_controller.dart';
-import 'package:covid_app/app/modules/request/local_widgets/success_request.dart';
-import 'package:covid_app/app/modules/request/request_controller.dart';
+import 'package:covid_app/app/modules/home/home_controller.dart';
 import 'package:covid_app/app/theme/color_theme.dart';
 import 'package:covid_app/app/utils/responsive.dart';
 import 'package:date_format/date_format.dart';
@@ -25,6 +23,7 @@ class _ContactUIState extends State<ContactUI> {
   @override
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
+    final HomeController _homeController = Get.put<HomeController>(HomeController());
 
     return GetBuilder<ContactController>(
       id: 'contact',
@@ -78,7 +77,7 @@ class _ContactUIState extends State<ContactUI> {
                                       color: ColorsPalette.primary,
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(8))),
-                                  child: Text('16',
+                                  child: Text(_homeController.contacts.length.toString(),
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w700,
@@ -94,11 +93,11 @@ class _ContactUIState extends State<ContactUI> {
                           child: Scrollbar(
                             child: ListView.builder(
                               padding: EdgeInsets.zero,
-                              itemCount: _.contacts.length,
+                              itemCount: _homeController.contacts.length,
                               itemBuilder: (context, index) {
                                 return SimpleCard(
                                   title:
-                                      'Fecha del contacto: ${formatDate(DateTime.fromMillisecondsSinceEpoch(_.contacts[index].createdAt), [
+                                      'Fecha del contacto: ${formatDate(DateTime.fromMillisecondsSinceEpoch(_homeController.contacts[index].createdAt), [
                                     dd,
                                     '-',
                                     mm,
@@ -106,7 +105,7 @@ class _ContactUIState extends State<ContactUI> {
                                     yyyy
                                   ])}',
                                   subtitle:
-                                      'Duración del contacto: ${_.contacts[index].duration.toString()} Minutos',
+                                      'Duración del contacto: ${_homeController.contacts[index].duration.toString()} Minutos',
                                   trailing: Icons.healing,
                                 );
                               },

@@ -8,7 +8,6 @@ import 'package:sqflite/sqflite.dart';
 class DBAPI {
   static Database _database;
   static final DBAPI db = DBAPI._();
-  // final String path = '/data/user/0/covid_tracing/databases/';
   final String path = '';
 
   DBAPI._();
@@ -24,7 +23,7 @@ class DBAPI {
   initDB() async {
     final tempDir = await getDatabasesPath();
     final path = join(tempDir, 'covidapp.db');
-    print('path: $path');
+
     return await openDatabase(
       path,
       version: 1,
@@ -91,7 +90,8 @@ class DBAPI {
 
   // Contacts
 
-  Future getAllContacts() async {
+  Future<List<Contact>> getAllContacts() async {
+    List<Contact> _contacts = List<Contact>();
     try {
       final db = await database;
 
@@ -101,9 +101,14 @@ class DBAPI {
           ? res.map((result) => Contact.fromJson(result)).toList()
           : [];
 
-      return list;
+      // Parse to Handshake list
+      for (Contact contact in list) {
+        _contacts.add(contact);
+      }
+
+      return _contacts;
     } catch (e) {
-      print(e);
+      print('Error on getAllContacts: $e');
       return null;
     }
   }
@@ -113,7 +118,14 @@ class DBAPI {
       final db = await database;
       await db.execute(
           'CREATE TABLE IF NOT EXISTS contacts (id INTEGER PRIMARY KEY AUTOINCREMENT, createdAt INTEGER NOT NULL, handshakes TEXT NOT NULL, duration INTEGER NOT NULL, shared INTEGER NOT NULL)');
-      await db.rawInsert('INSERT INTO contacts(createdAt, handshakes, duration, shared) VALUES(?, ?, ?, ?)', [contact.createdAt, json.encode(contact.handshakes), contact.duration, contact.shared]);
+      await db.rawInsert(
+          'INSERT INTO contacts(createdAt, handshakes, duration, shared) VALUES(?, ?, ?, ?)',
+          [
+            contact.createdAt,
+            json.encode(contact.handshakes),
+            contact.duration,
+            contact.shared
+          ]);
       return true;
     } catch (e) {
       print('Error on createContact: $e');

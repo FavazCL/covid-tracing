@@ -1,4 +1,5 @@
 import 'package:covid_app/app/global_widgets/paragraph.dart';
+import 'package:covid_app/app/global_widgets/rounded_button.dart';
 import 'package:covid_app/app/routes/app_routes.dart';
 import 'package:covid_app/app/theme/color_theme.dart';
 import 'package:covid_app/app/utils/responsive.dart';
@@ -18,6 +19,7 @@ class HomeUI extends StatelessWidget {
     final Responsive responsive = Responsive.of(context);
 
     return GetBuilder<HomeController>(
+      id: 'home',
       builder: (_) => SafeArea(
         child: Scaffold(
           body: Container(
@@ -86,7 +88,7 @@ class HomeUI extends StatelessWidget {
                           })),
                 ),
                 Positioned(
-                  bottom: responsive.dp(16),
+                  bottom: responsive.dp(14),
                   child: Container(
                     width: responsive.width,
                     child: Column(
@@ -94,23 +96,42 @@ class HomeUI extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          child: Icon(
-                            Icons.check,
-                            size: responsive.dp(5),
-                          ),
+                          child: (_.contacts.length < 1)
+                              ? Icon(
+                                  Icons.check,
+                                  size: responsive.dp(5),
+                                  color: Colors.greenAccent,
+                                )
+                              : Icon(Icons.warning,
+                                  size: responsive.dp(5),
+                                  color: Colors.orangeAccent),
                         ),
                         SizedBox(height: responsive.dp(2)),
                         Container(
-                          child: Text('No hay indicios de contacto',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: responsive.dp(2))),
+                          child: (_.contacts.length < 1)
+                              ? Text('No hay indicios de contacto',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: responsive.dp(2)))
+                              : Text(
+                                  'Tienes ${_.contacts.length} ${(_.contacts.length == 1) ? 'contacto estrecho' : 'contactos estrechos'}',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: responsive.dp(2))),
                         ),
                         SizedBox(height: responsive.dp(2)),
-                        Paragraph(
+                        (_.contacts.length < 1) ? Paragraph(
                             fontSize: responsive.dp(0.2),
                             text:
-                                'Tu dispositivo no ha tenido contacto con una persona contagiada, sigue cuidandote.')
+                                'Tu dispositivo no ha tenido contacto con una persona contagiada, sigue cuidandote.') : Paragraph(
+                            fontSize: responsive.dp(0.2),
+                            text:
+                                'Tu dispositivo ha tenido contacto con una persona contagiada, cuidate.'),
+                                SizedBox(height: responsive.dp(2)),
+                        (_.contacts.length > 0) ? RoundedButton(
+                            text: 'Ver sintomas',
+                            color: ColorsPalette.primary,
+                            onPressed: () => Get.toNamed('sympthom')) : SizedBox.shrink()
                       ],
                     ),
                   ),

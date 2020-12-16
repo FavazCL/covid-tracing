@@ -15,22 +15,27 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // viewHandshakes();
-    getAllContacts();
+    //viewHandshakes();
+    // getAllContacts();
+    //deleteContacts();
   }
 
   void getAllContacts() async {
-    // contacts = await _dbRepository.get
+    contacts = await _dbRepository.getAllContacts();
+    update(['home']);
+  }
+
+  void deleteContacts() async {
+    await _dbRepository.deleteAllContacts();
   }
 
   viewHandshakes() async {
     var res = await _dbRepository.getAllHandshakes();
-
-    Contact _contact = Contact();
-    _contact.createdAt = DateTime.now().millisecondsSinceEpoch;
-    _contact.handshakes = res;
-    _contact.duration = 15;
-    _contact.shared = 0;
+     Contact _contact = Contact();
+     _contact.createdAt = DateTime.now().millisecondsSinceEpoch;
+     _contact.handshakes = res;
+     _contact.duration = 15;
+     _contact.shared = 0;
 
     var res2 = await _dbRepository.createContact(contact: _contact);
   }
