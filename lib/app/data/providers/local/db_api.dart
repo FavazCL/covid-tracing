@@ -144,10 +144,10 @@ class DBAPI {
   Future updateContact({Contact contact}) async {
     final db = await database;
 
-    final res = await db.update('contacs', contact.toJson(),
+    final res = await db.update('contacts', contact.toJson(),
         where: 'id = ?', whereArgs: [contact.id]);
-
-    return res;
+    print('ressssss: $res');
+    return true;
   }
 
   Future deleteContact({int id}) async {

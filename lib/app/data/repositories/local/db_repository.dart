@@ -14,5 +14,6 @@ class DBRepository {
 
   Future<dynamic> createContact({Contact contact}) => _dbapi.createContact(contact: contact);
   Future<List<Contact>> getAllContacts() => _dbapi.getAllContacts();
+  Future<dynamic> updateContact({Contact contact}) => _dbapi.updateContact(contact: contact);  
   Future<dynamic> deleteAllContacts() => _dbapi.deleteAllContacts();
 }

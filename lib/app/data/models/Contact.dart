@@ -20,7 +20,7 @@ class Contact {
   Map<String, dynamic> toJson() => {
     'id': id,
     'createdAt': createdAt,
-    'handshakes': handshakes,
+    'handshakes': jsonEncode(handshakes),
     'duration': duration,
     'shared': shared
   };

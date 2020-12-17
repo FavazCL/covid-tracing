@@ -16,7 +16,7 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     //viewHandshakes();
-    // getAllContacts();
+    getAllContacts();
     //deleteContacts();
   }
 

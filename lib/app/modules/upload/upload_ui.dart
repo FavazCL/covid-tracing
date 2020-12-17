@@ -106,10 +106,11 @@ class _UploadUIState extends State<UploadUI> {
                             fontWeight: FontWeight.bold,
                             fontSize: 1.5),
                         SizedBox(height: responsive.hp(4)),
+                        (!_.loading) ? 
                         RoundedButton(
                             text: 'Compartir',
                             color: ColorsPalette.primary,
-                            onPressed: () => _.uploadContacts())
+                            onPressed: () => _.uploadContacts()) : CircularProgressIndicator()
                       ],
                     ),
                   ),

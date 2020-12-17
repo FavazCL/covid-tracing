@@ -44,7 +44,12 @@ class CryptoController extends GetxController {
   }
 
   void init() {
-    _getCurrentEphIds();
+    // _getCurrentEphIds();
+    clearData();
+  }
+
+  clearData() {
+    prefs.ephids = null;
   }
 
   void _getCurrentEphIds() {

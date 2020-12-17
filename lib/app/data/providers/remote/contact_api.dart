@@ -6,8 +6,9 @@ class ContactAPI {
 
   Future<bool> uploadContacts({List<Contact> contacts}) async {
     try {
-      contacts.map((Contact e) async =>
-          await _firestore.collection('contacts').add(e.toJson()));
+      for (Contact contact in contacts) {
+        await _firestore.collection('contacts').add(contact.toJson());
+      }
       return true;
     } catch (e) {
       print('Error on createReport: $e');
