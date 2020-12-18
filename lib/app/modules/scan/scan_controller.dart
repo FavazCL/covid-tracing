@@ -1,45 +1,23 @@
-import 'package:get/state_manager.dart';
-import 'package:flutter_ble_lib/flutter_ble_lib.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 class ScanController extends GetxController {
+  static const platform = const MethodChannel('dev/tracing');
 
-  // Blemulator blemulator = Blemulator();
-  // BleManager bleManager = BleManager();
-  BleManager bleManager2 = BleManager();
-
-  @override
-  void onClose() {
-    // bleManager2?.stopPeripheralScan();
-    // bleManager2.destroyClient();
-    // bleManager?.destroyClient();
-    stop();
-    super.onClose();
+  Future<void> stopScan() async {
+    await platform.invokeMethod('stop');
+    Get.back();
   }
 
   @override
   void onInit() {
     super.onInit();
-    initEmulator();
+    // startScan();
   }
 
-  stop() async {
-    await bleManager2?.stopPeripheralScan();
-    await bleManager2.destroyClient();
+  @override
+  void onClose() {
+    stopScan();
+    super.onClose();
   }
-
-  void initEmulator() async {
-    // blemulator.addSimulatedPeripheral(PeripheralTracing());
-    // await blemulator.simulate();
-    // await bleManager.createClient();
-
-    await bleManager2.createClient();
-    bleManager2.startPeripheralScan().listen((scanResult) {
-         print("Scanned Peripheral ${scanResult.peripheral.identifier}, RSSI ${scanResult.rssi}");
-    }, onError: (e) {
-      print('Error when start scan: $e');
-    }, onDone: () {
-      print('Done');
-    });
-  }
-
 }

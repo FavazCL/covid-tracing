@@ -22,6 +22,7 @@ class SuccessReportUI extends StatelessWidget {
                 child: SafeArea(
                   child: Container(
                     width: responsive.width,
+                    height: responsive.height,
                     color: Colors.white,
                     child: Column(
                       children: [

@@ -10,4 +10,5 @@ class AppRoutes {
   static const SPLASH = "splash";
   static const UPLOAD = "upload";
   static const CONTACT = "contact";
+  static const NOTIFICATION = "notification";
 }

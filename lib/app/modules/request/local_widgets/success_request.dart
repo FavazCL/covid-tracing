@@ -18,6 +18,7 @@ class SuccessRequestUI extends StatelessWidget {
 
     return GetBuilder<ReportController>(
         builder: (_) => Scaffold(
+          backgroundColor: Colors.white,
               body: SingleChildScrollView(
                 child: SafeArea(
                   child: Container(
@@ -35,13 +36,11 @@ class SuccessRequestUI extends StatelessWidget {
                         ImageHeader(
                             path: 'assets/screens/others/confirmed.svg',
                             size: responsive.dp(3)),
-                        SizedBox(height: responsive.hp(5)),
+                        SizedBox(height: responsive.hp(8)),
                         Paragraph(
                             text:
                                 'Se ha realizado una solicitud de código, recuerda que el encargado verificará el certificado y te enviará el código al correo ingresado.'),
                         SizedBox(height: responsive.hp(8)),
-                        // RoundedButton(text: 'Apoyar estudio', onPressed: () => Get.toNamed(AppRoutes.UPLOAD), color: Colors.redAccent),
-                        // SizedBox(height: responsive.hp(5)),
                         RoundedButton(
                             text: 'Volver al inicio',
                             color: ColorsPalette.primary,

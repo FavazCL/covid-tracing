@@ -3,7 +3,6 @@ import 'package:covid_app/app/global_widgets/image_header.dart';
 import 'package:covid_app/app/global_widgets/paragraph.dart';
 import 'package:covid_app/app/global_widgets/rounded_button.dart';
 import 'package:covid_app/app/global_widgets/simple_card.dart';
-import 'package:covid_app/app/modules/request/local_widgets/success_request.dart';
 import 'package:covid_app/app/modules/request/request_controller.dart';
 import 'package:covid_app/app/theme/color_theme.dart';
 import 'package:covid_app/app/utils/responsive.dart';
@@ -14,7 +13,6 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'local_widgets/circle_button.dart';
 
 class RequestUI extends StatefulWidget {
-  static const routeName = 'request';
   const RequestUI({Key key}) : super(key: key);
 
   @override
@@ -49,16 +47,16 @@ class _RequestUIState extends State<RequestUI> {
                     width: responsive.width,
                     child: Column(
                       children: [
-                        SizedBox(height: responsive.dp(2.5)),
+                        SizedBox(height: responsive.hp(2.5)),
                         ImageHeader(
                             path: 'assets/screens/request/going_up.svg',
                             size: responsive.dp(2)),
-                        SizedBox(height: responsive.dp(2)),
+                        SizedBox(height: responsive.hp(2)),
                         Paragraph(
                             text:
                                 'Solicita un código adjuntando o tomando una foto de tu certificado médico, el que se enviará al correo ingresado.',
                             fontSize: 1.8),
-                        SizedBox(height: responsive.dp(3)),
+                        SizedBox(height: responsive.hp(3)),
                         Container(
                           padding: EdgeInsets.symmetric(
                               horizontal: responsive.wp(5)),
@@ -77,9 +75,9 @@ class _RequestUIState extends State<RequestUI> {
                                 border: OutlineInputBorder()),
                           ),
                         ),
-                        SizedBox(height: responsive.dp(2)),
+                        SizedBox(height: responsive.hp(2)),
                         Divider(),
-                        SizedBox(height: responsive.dp(2)),
+                        SizedBox(height: responsive.hp(2)),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -115,7 +113,7 @@ class _RequestUIState extends State<RequestUI> {
                             ),
                           ],
                         ),
-                        SizedBox(height: responsive.dp(2)),
+                        SizedBox(height: responsive.hp(2)),
                         (!_.image)
                             ? SimpleCard(
                                 title: 'Aún no ha adjuntado la imagen.',
@@ -154,7 +152,7 @@ class _RequestUIState extends State<RequestUI> {
                             activeColor: Colors.green,
                           ),
                         ),
-                        RoundedButton(
+                        (_.loading) ? CircularProgressIndicator() : RoundedButton(
                           text: 'ENVIAR POR CORREO',
                           color: (_.file != null && _.checked)
                               ? ColorsPalette.primary

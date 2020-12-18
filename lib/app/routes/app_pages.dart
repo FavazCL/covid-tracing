@@ -6,6 +6,8 @@ import 'package:covid_app/app/modules/home/home_binding.dart';
 import 'package:covid_app/app/modules/home/home_ui.dart';
 import 'package:covid_app/app/modules/intro/intro_binding.dart';
 import 'package:covid_app/app/modules/intro/intro_ui.dart';
+import 'package:covid_app/app/modules/notification/notification_binding.dart';
+import 'package:covid_app/app/modules/notification/notification_ui.dart';
 import 'package:covid_app/app/modules/permission/permission_binding.dart';
 import 'package:covid_app/app/modules/permission/permission_ui.dart';
 import 'package:covid_app/app/modules/report/report_binding.dart';
@@ -79,6 +81,11 @@ class AppPages {
       name: AppRoutes.CONTACT,
       page: () => ContactUI(),
       binding: ContactBinding()
+    ),
+    GetPage(
+      name: AppRoutes.NOTIFICATION,
+      page: () => NotificationUI(),
+      binding: NotificationBinding()
     )
   ];
 }

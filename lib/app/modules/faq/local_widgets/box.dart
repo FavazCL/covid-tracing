@@ -21,7 +21,7 @@ class Box extends StatelessWidget {
               bottomLeft: Radius.circular(12),
               bottomRight: Radius.circular(12))),
       width: responsive.width,
-      height: responsive.dp(8),
+      height: responsive.hp(8),
       child: Paragraph(text: this.text, fontSize: responsive.dp(0.18), color: Colors.white,),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:covid_app/app/theme/color_theme.dart';
+import 'package:covid_app/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 import 'custom_tile.dart';
@@ -16,8 +17,10 @@ class Question extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Responsive responsive = Responsive.of(context);
+
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: 20),
+        margin: EdgeInsets.symmetric(horizontal: responsive.wp(5)),
         decoration: BoxDecoration(
             color: ColorsPalette.primary, borderRadius: BorderRadius.circular(12)),
         child: CustomTile(

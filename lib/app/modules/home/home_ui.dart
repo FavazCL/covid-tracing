@@ -1,4 +1,5 @@
 import 'package:covid_app/app/global_widgets/paragraph.dart';
+import 'package:covid_app/app/global_widgets/rounded_button.dart';
 import 'package:covid_app/app/routes/app_routes.dart';
 import 'package:covid_app/app/theme/color_theme.dart';
 import 'package:covid_app/app/utils/responsive.dart';
@@ -18,6 +19,7 @@ class HomeUI extends StatelessWidget {
     final Responsive responsive = Responsive.of(context);
 
     return GetBuilder<HomeController>(
+      id: 'home',
       builder: (_) => SafeArea(
         child: Scaffold(
           body: Container(
@@ -41,7 +43,7 @@ class HomeUI extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  top: responsive.dp(2),
+                  top: responsive.hp(2),
                   child: Container(
                     width: responsive.width,
                     child: Text('Covid Tracing',
@@ -53,40 +55,41 @@ class HomeUI extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  top: responsive.dp(13),
-                  left: responsive.dp(10),
+                  top: responsive.hp(14),
+                  left: responsive.wp(21),
                   child: Hero(
                       tag: 'scan',
                       child: ScanButton(
                         text: 'EMITIR',
                         scan: false,
-                        onPressed: () => Get.toNamed(AppRoutes.SCAN),
+                        onPressed: () => _.verifyBluetooth(),
                       )),
                 ),
                 Positioned(
-                  top: responsive.dp(1),
-                  right: responsive.dp(1),
+                  top: responsive.hp(1),
+                  right: responsive.wp(1),
                   child: Container(
                       child: IconButton(
                           iconSize: responsive.dp(2.5),
                           icon: Icon(Icons.cloud_upload,
-                              color: ColorsPalette.secundary),
+                              color: (_.contacts.length > 0)
+                                  ? ColorsPalette.primary
+                                  : ColorsPalette.secundary),
                           onPressed: (() => Get.toNamed(AppRoutes.UPLOAD)))),
                 ),
                 Positioned(
-                  top: responsive.dp(1),
-                  left: responsive.dp(1),
+                  top: responsive.hp(0.8),
+                  left: responsive.wp(1),
                   child: Container(
                       child: IconButton(
                           iconSize: responsive.dp(2.5),
-                          icon: Icon(Icons.settings,
-                              color: ColorsPalette.secundary),
-                          onPressed: () {
-                            print('To do..');
-                          })),
+                          icon: Icon(Icons.notification_important,
+                              color: (_.contacts.length > 0)
+                                  ? Colors.yellowAccent[200].withOpacity(0.9) : ColorsPalette.secundary),
+                          onPressed: (() => Get.toNamed(AppRoutes.NOTIFICATION)))),
                 ),
                 Positioned(
-                  bottom: responsive.dp(16),
+                  bottom: responsive.hp(15),
                   child: Container(
                     width: responsive.width,
                     child: Column(
@@ -94,23 +97,46 @@ class HomeUI extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          child: Icon(
-                            Icons.check,
-                            size: responsive.dp(5),
-                          ),
+                          child: (_.contacts.length < 1)
+                              ? Icon(
+                                  Icons.check,
+                                  size: responsive.dp(5),
+                                  color: Colors.greenAccent,
+                                )
+                              : Icon(Icons.warning,
+                                  size: responsive.dp(5),
+                                  color: Colors.orangeAccent),
                         ),
                         SizedBox(height: responsive.dp(2)),
                         Container(
-                          child: Text('No hay indicios de contacto',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: responsive.dp(2))),
+                          child: (_.contacts.length < 1)
+                              ? Text('No hay indicios de contacto',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: responsive.dp(2)))
+                              : Text(
+                                  'Tienes ${_.contacts.length} ${(_.contacts.length == 1) ? 'contacto estrecho' : 'contactos estrechos'}',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: responsive.dp(2))),
                         ),
                         SizedBox(height: responsive.dp(2)),
-                        Paragraph(
-                            fontSize: responsive.dp(0.2),
-                            text:
-                                'Tu dispositivo no ha tenido contacto con una persona contagiada, sigue cuidandote.')
+                        (_.contacts.length < 1)
+                            ? Paragraph(
+                                fontSize: responsive.dp(0.2),
+                                text:
+                                    'Tu dispositivo no ha tenido contacto con una persona contagiada, sigue cuidandote.')
+                            : Paragraph(
+                                fontSize: responsive.dp(0.2),
+                                text:
+                                    'Tu dispositivo ha tenido contacto con una persona contagiada, cuidate.'),
+                        SizedBox(height: responsive.dp(2)),
+                        (_.contacts.length > 0)
+                            ? RoundedButton(
+                                text: 'Ver sintomas',
+                                color: ColorsPalette.primary,
+                                onPressed: () => Get.toNamed('sympthom'))
+                            : SizedBox.shrink()
                       ],
                     ),
                   ),
