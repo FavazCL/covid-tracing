@@ -19,7 +19,7 @@ class CircularPainter extends CustomPainter {
     lapiz.maskFilter = MaskFilter.blur(BlurStyle.normal, _sigma);
 
     canvas.drawCircle(
-      Offset(responsive.wp(52), responsive.hp(27.8)),
+      Offset(responsive.wp(50.3), responsive.hp(27.8)),
       responsive.dp(12.9),
       lapiz
     );

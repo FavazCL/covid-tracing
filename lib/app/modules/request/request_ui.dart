@@ -152,7 +152,7 @@ class _RequestUIState extends State<RequestUI> {
                             activeColor: Colors.green,
                           ),
                         ),
-                        RoundedButton(
+                        (_.loading) ? CircularProgressIndicator() : RoundedButton(
                           text: 'ENVIAR POR CORREO',
                           color: (_.file != null && _.checked)
                               ? ColorsPalette.primary

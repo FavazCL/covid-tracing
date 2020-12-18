@@ -56,13 +56,13 @@ class HomeUI extends StatelessWidget {
                 ),
                 Positioned(
                   top: responsive.hp(14),
-                  left: responsive.wp(22.5),
+                  left: responsive.wp(21),
                   child: Hero(
                       tag: 'scan',
                       child: ScanButton(
                         text: 'EMITIR',
                         scan: false,
-                        onPressed: () => Get.toNamed(AppRoutes.SCAN),
+                        onPressed: () => _.verifyBluetooth(),
                       )),
                 ),
                 Positioned(
@@ -72,20 +72,21 @@ class HomeUI extends StatelessWidget {
                       child: IconButton(
                           iconSize: responsive.dp(2.5),
                           icon: Icon(Icons.cloud_upload,
-                              color: ColorsPalette.secundary),
+                              color: (_.contacts.length > 0)
+                                  ? ColorsPalette.primary
+                                  : ColorsPalette.secundary),
                           onPressed: (() => Get.toNamed(AppRoutes.UPLOAD)))),
                 ),
                 Positioned(
-                  top: responsive.hp(1),
+                  top: responsive.hp(0.8),
                   left: responsive.wp(1),
                   child: Container(
                       child: IconButton(
                           iconSize: responsive.dp(2.5),
-                          icon: Icon(Icons.settings,
-                              color: ColorsPalette.secundary),
-                          onPressed: () {
-                            print('To do..');
-                          })),
+                          icon: Icon(Icons.notification_important,
+                              color: (_.contacts.length > 0)
+                                  ? Colors.yellowAccent[200].withOpacity(0.9) : ColorsPalette.secundary),
+                          onPressed: (() => Get.toNamed(AppRoutes.NOTIFICATION)))),
                 ),
                 Positioned(
                   bottom: responsive.hp(15),
@@ -120,18 +121,22 @@ class HomeUI extends StatelessWidget {
                                       fontSize: responsive.dp(2))),
                         ),
                         SizedBox(height: responsive.dp(2)),
-                        (_.contacts.length < 1) ? Paragraph(
-                            fontSize: responsive.dp(0.2),
-                            text:
-                                'Tu dispositivo no ha tenido contacto con una persona contagiada, sigue cuidandote.') : Paragraph(
-                            fontSize: responsive.dp(0.2),
-                            text:
-                                'Tu dispositivo ha tenido contacto con una persona contagiada, cuidate.'),
-                                SizedBox(height: responsive.dp(2)),
-                        (_.contacts.length > 0) ? RoundedButton(
-                            text: 'Ver sintomas',
-                            color: ColorsPalette.primary,
-                            onPressed: () => Get.toNamed('sympthom')) : SizedBox.shrink()
+                        (_.contacts.length < 1)
+                            ? Paragraph(
+                                fontSize: responsive.dp(0.2),
+                                text:
+                                    'Tu dispositivo no ha tenido contacto con una persona contagiada, sigue cuidandote.')
+                            : Paragraph(
+                                fontSize: responsive.dp(0.2),
+                                text:
+                                    'Tu dispositivo ha tenido contacto con una persona contagiada, cuidate.'),
+                        SizedBox(height: responsive.dp(2)),
+                        (_.contacts.length > 0)
+                            ? RoundedButton(
+                                text: 'Ver sintomas',
+                                color: ColorsPalette.primary,
+                                onPressed: () => Get.toNamed('sympthom'))
+                            : SizedBox.shrink()
                       ],
                     ),
                   ),

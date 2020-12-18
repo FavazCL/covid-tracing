@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:covid_app/app/data/models/NotificationEphId.dart';
 import 'package:covid_app/app/data/models/Report.dart';
+import 'package:covid_app/app/data/repositories/local/db_repository.dart';
 import 'package:covid_app/app/utils/crypto_controller.dart';
 import 'package:covid_app/app/utils/shared_preferences/shared_prefs_controller.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -11,6 +13,7 @@ class FCMApi {
       Get.put<CryptoController>(CryptoController());
   final SharedPrefsController _prefs =
       Get.put<SharedPrefsController>(SharedPrefsController());
+  final DBRepository _dbRepository = Get.put<DBRepository>(DBRepository());
   Report _report;
 
   void configure() {
@@ -52,6 +55,19 @@ class FCMApi {
 
     if (!emisor) {
       _cryptoController.compareEphIds(_report);
+    }
+  }
+
+  void saveNotification(Report report) {
+    NotificationEphId notificationEphId = NotificationEphId();
+    notificationEphId.date = report.reportDate;
+    notificationEphId.message =
+        'Un nuevo caso ha sido notificado, verifica que no eres un contacto estrecho.';
+    
+    try {
+      _dbRepository.createNotification(notificationEphId: notificationEphId);
+    } catch (e) {
+      print('Error on saveNotification: $e');
     }
   }
 

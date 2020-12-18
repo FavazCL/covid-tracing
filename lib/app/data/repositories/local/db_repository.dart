@@ -1,5 +1,6 @@
 import 'package:covid_app/app/data/models/Contact.dart';
 import 'package:covid_app/app/data/models/Handshake.dart';
+import 'package:covid_app/app/data/models/NotificationEphId.dart';
 import 'package:covid_app/app/data/providers/local/db_api.dart';
 import 'package:get/get.dart';
 
@@ -16,4 +17,8 @@ class DBRepository {
   Future<List<Contact>> getAllContacts() => _dbapi.getAllContacts();
   Future<dynamic> updateContact({Contact contact}) => _dbapi.updateContact(contact: contact);  
   Future<dynamic> deleteAllContacts() => _dbapi.deleteAllContacts();
+
+  Future<dynamic> createNotification({NotificationEphId notificationEphId}) => _dbapi.createNotification(notificationEphId: notificationEphId);
+  Future<List<NotificationEphId>> getAllNotifications() => _dbapi.getAllNotifications();
+  Future<dynamic> deleteAllNotifications() => _dbapi.deleteAllNotifications();
 }

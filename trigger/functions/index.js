@@ -86,7 +86,7 @@ exports.sendMail = functions.https.onRequest((req, res) => {
                 <h3 style="text-align: center; color: #463e5d;">Informaci&oacute;n ingresada por el usuario:</h3>
                 <div>
                 <div>
-                <p style="text-align: center;"><strong style="color: #463e5d;">Correo:</strong> `+ fields['email'] + `<br /><strong style="color: #463e5d;">Rut:</strong> `+ fields['rut'] + `<br /><strong style="color: #463e5d;">Fecha de solicitud:</strong> `+ fields['date'] + `</p>
+                <p style="text-align: center;"><strong style="color: #463e5d;">Correo:</strong> `+ fields['email'] + `<br /><strong style="color: #463e5d;">Fecha de solicitud:</strong> `+ fields['date'] + `</p>
                 </div>
                 </div>
                 </div>

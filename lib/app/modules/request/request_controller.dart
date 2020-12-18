@@ -13,13 +13,20 @@ class RequestController extends GetxController {
   File file;
   bool _image = false;
   bool _checked = false;
+  bool _loading = false;
   String _textImage;
   String _email;
 
   bool get image => _image;
   bool get checked => _checked;
+  bool get loading => _loading;
   String get textImage => _textImage;
   String get email => _email;
+
+  set setLoading(bool value) {
+    _loading = value;
+    update(['request']);
+  }
 
   set setImage(bool value) {
     _image = value;
@@ -77,10 +84,11 @@ class RequestController extends GetxController {
 
   Future<void> requestCode() async {
     try {
+      print('FILE: $file');
+      setLoading = true;
       dio.FormData formData = dio.FormData.fromMap({
-        "dest": "favazcl@gmail.com", // Correo de la persona encargada
+        "dest": "fvergaraa5@correo.uss.cl", // Correo de la persona encargada
         "email": email,
-        "rut": "11.111.111-1",
         "date": formatDate(DateTime.now(), [dd, '-', mm, '-', yyyy, ' a las ', HH, ':', nn, ':', ss]),
         "certificate": file
       });
@@ -98,5 +106,6 @@ class RequestController extends GetxController {
     } catch (e) {
       print('Error on requestCode: $e');
     }
+    setLoading = false;
   }
 }

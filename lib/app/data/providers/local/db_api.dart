@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:covid_app/app/data/models/Contact.dart';
 import 'package:covid_app/app/data/models/Handshake.dart';
+import 'package:covid_app/app/data/models/NotificationEphId.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -109,7 +110,7 @@ class DBAPI {
       return _contacts;
     } catch (e) {
       print('Error on getAllContacts: $e');
-      return null;
+      return [];
     }
   }
 
@@ -162,6 +163,56 @@ class DBAPI {
     final db = await database;
 
     final res = await db.rawDelete('DELETE FROM contacts');
+
+    return res;
+  }
+
+  // Notifications
+
+  Future<List<NotificationEphId>> getAllNotifications() async {
+    List<NotificationEphId> _notifications = List<NotificationEphId>();
+    try {
+      final db = await database;
+
+      final res = await db.query('notifications');
+
+      List<dynamic> list = res.isNotEmpty
+          ? res.map((result) => NotificationEphId.fromJson(result)).toList()
+          : [];
+
+      for (NotificationEphId notification in list) {
+        _notifications.add(notification);
+      }
+
+      return _notifications;
+    } catch (e) {
+      print('Error on getAllNotifications: $e');
+      return [];
+    }
+  }
+
+  Future createNotification({NotificationEphId notificationEphId}) async {
+    try {
+      final db = await database;
+      await db.execute(
+          'CREATE TABLE IF NOT EXISTS notifications (id INTEGER PRIMARY KEY AUTOINCREMENT, date INTEGER NOT NULL, message TEXT NOT NULL)');
+      await db.rawInsert(
+          'INSERT INTO notifications(date, message) VALUES(?, ?)',
+          [
+            notificationEphId.date,
+            notificationEphId.message
+          ]);
+      return true;
+    } catch (e) {
+      print('Error on createNotification: $e');
+      return false;
+    }
+  }
+
+  Future deleteAllNotifications() async {
+    final db = await database;
+
+    final res = await db.rawDelete('DELETE FROM notifications');
 
     return res;
   }

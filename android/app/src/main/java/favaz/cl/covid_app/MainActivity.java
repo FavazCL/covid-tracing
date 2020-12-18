@@ -40,13 +40,19 @@ public class MainActivity extends FlutterActivity {
             .setMethodCallHandler((call, result) -> {
               if (call.method.equals("start")) {
                 byte[] res = call.argument("data");
-                this.running = start(res);
-                System.out.println("working");
-                Log.d(TAG, res.toString());
-                if (this.running) {
-                  result.success(true);
+                bluetoothAdapter = ((BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE))
+            .getAdapter();
+                if (bluetoothAdapter != null && bluetoothAdapter.isEnabled()) {
+                  this.running = start(res);
+                  System.out.println("working");
+                  Log.d(TAG, res.toString());
+                  if (this.running) {
+                    result.success(true);
+                  } else {
+                    result.success(false);
+                  }
                 } else {
-                  result.error(TAG, "Failed to start Advertising.", null);
+                  result.success(false);
                 }
               }
 
@@ -57,13 +63,14 @@ public class MainActivity extends FlutterActivity {
                   System.out.println("finish");
                   result.success(true);
                 } else {
-                  result.error(TAG, "Failed to stop tracing.", null);
+                  result.success(false);
                 }
               }
             });
   }
 
   private boolean start(byte[] res) {
+    System.out.println("SUPONGO QUE NO");
     bluetoothAdapter = ((BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE))
             .getAdapter();
 

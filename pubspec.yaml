@@ -75,6 +75,7 @@ flutter:
     - assets/screens/code/
     - assets/screens/upload/
     - assets/screens/others/
+    - assets/screens/notification/
     - assets/animations/mask.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
