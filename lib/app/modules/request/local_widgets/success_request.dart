@@ -40,8 +40,6 @@ class SuccessRequestUI extends StatelessWidget {
                             text:
                                 'Se ha realizado una solicitud de código, recuerda que el encargado verificará el certificado y te enviará el código al correo ingresado.'),
                         SizedBox(height: responsive.hp(8)),
-                        // RoundedButton(text: 'Apoyar estudio', onPressed: () => Get.toNamed(AppRoutes.UPLOAD), color: Colors.redAccent),
-                        // SizedBox(height: responsive.hp(5)),
                         RoundedButton(
                             text: 'Volver al inicio',
                             color: ColorsPalette.primary,

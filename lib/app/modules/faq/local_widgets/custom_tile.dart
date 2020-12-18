@@ -22,7 +22,7 @@ class CustomTile extends StatelessWidget {
     return ExpansionTile(
       title: Text(this.title, style: TextStyle(
         fontWeight: FontWeight.bold,
-        color: Colors.white.withOpacity(0.8),
+        color: Colors.white,
         fontSize: responsive.dp(1.5)
       )),
       leading: Icon(this.iconData),

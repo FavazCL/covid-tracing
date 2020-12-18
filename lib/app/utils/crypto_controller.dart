@@ -44,8 +44,8 @@ class CryptoController extends GetxController {
   }
 
   void init() {
-    // _getCurrentEphIds();
-    clearData();
+    _getCurrentEphIds();
+    // clearData();
   }
 
   clearData() {
@@ -57,7 +57,6 @@ class CryptoController extends GetxController {
       _createEphId();
     } else {
       var decode = json.decode(prefs.ephids);
-      print('decode: $decode');
       for (var ephId in decode) {
         List<int> listInt = List.castFrom(ephId['data']);
         ephId['data'] = Uint8List.fromList(listInt);
@@ -73,20 +72,28 @@ class CryptoController extends GetxController {
   void _getCurrentEphId() {
     DateTime currentDay = DateTime.now();
 
+    var parseDate = DateTime.fromMillisecondsSinceEpoch(ephIds.last.createdAt);
+    int diffDays = currentDay.difference(parseDate).inDays;
+    bool isSame = (diffDays == 0 && parseDate.day == currentDay.day);
+
+    if (isSame) {
+      _ephId = ephIds.last;
+    } else {
+      _createEphId();
+    }
+
+    /*
     for (EphId ephId in ephIds) {
       var parseDate = DateTime.fromMillisecondsSinceEpoch(ephId.createdAt);
-      int diffDays = currentDay.difference(parseDate).inDays;
+      int diffDays = parseDate.difference(currentDay).inDays;
       bool isSame = (diffDays == 0 && parseDate.day == currentDay.day);
-
       if (isSame) {
-        print('Son iguales');
         _ephId = ephId;
       } else {
-        print('No son iguales');
-        print('ephid: ${ephId.data}');
-        _createEphId();
+        // _createEphId();
       }
     }
+    */
   }
 
   void _createEphId() {
@@ -178,7 +185,7 @@ class CryptoController extends GetxController {
       }
 
       // 5. Si se cumple se manda un mensaje avisando que es contacto estrecho o no.
-      if (minutes >= 5) {
+      if (minutes >= 15) {
         // Crear y almacenar localmente un nuevo contacto.
         Contact _contact = Contact();
         _contact.createdAt = DateTime.now().millisecondsSinceEpoch;

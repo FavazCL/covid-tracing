@@ -27,14 +27,23 @@ class UploadController extends GetxController {
   void uploadContacts() async {
     setLoading = true;
     List<Contact> tmpContact = await _dbRepository.getAllContacts();
-    print('pre-pre: $tmpContact');
+
+    if (tmpContact.length == 0 || tmpContact == null) {
+      setLoading = false;
+      Get.snackbar('No hay contactos!', '',
+          snackPosition: SnackPosition.TOP,
+          messageText: Text(
+              'No tienes contactos estrechos para compartir.'),
+          icon: Icon(Icons.check, color: Colors.greenAccent));
+      return;
+    }
+
     _contacts = tmpContact
         .where((Contact contact) => contact.shared == 1).toList();
-    print('ahahaha: $_contacts');
+
     final res = await _contactRepository.uploadContacts(contacts: _contacts);
-    print('1: $res');
+
     if (res) {
-      print('2');
       Get.snackbar('Contactos compartidos con éxito', '',
           snackPosition: SnackPosition.TOP,
           messageText: Text(

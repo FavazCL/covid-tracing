@@ -47,7 +47,7 @@ class ScanUI extends StatelessWidget {
                           )),
                     ),
                     CircularProgress(sigma: 5, opacity: 0.4, radius: 12.5),
-                    CircularProgress(sigma: 10, opacity: 0.12, radius: 14.0),
+                    CircularProgress(sigma: 10, opacity: 0.12, radius: 12.8),
                     Container(
                       alignment: Alignment.center,
                       child: Hero(

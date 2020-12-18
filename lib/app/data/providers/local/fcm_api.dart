@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:covid_app/app/data/models/Report.dart';
 import 'package:covid_app/app/utils/crypto_controller.dart';
 import 'package:covid_app/app/utils/shared_preferences/shared_prefs_controller.dart';

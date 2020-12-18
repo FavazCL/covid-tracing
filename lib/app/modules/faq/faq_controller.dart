@@ -1,5 +1,3 @@
 import 'package:get/get.dart';
 
-class FaqController extends GetxController {
-  // TO DO..
-}
+class FaqController extends GetxController { }

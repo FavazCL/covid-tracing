@@ -2,7 +2,6 @@ import 'package:covid_app/app/global_widgets/header.dart';
 import 'package:covid_app/app/global_widgets/image_header.dart';
 import 'package:covid_app/app/global_widgets/paragraph.dart';
 import 'package:covid_app/app/global_widgets/rounded_button.dart';
-import 'package:covid_app/app/modules/request/request_controller.dart';
 import 'package:covid_app/app/modules/upload/local_widgets/card_detail.dart';
 import 'package:covid_app/app/modules/upload/upload_controller.dart';
 import 'package:covid_app/app/theme/color_theme.dart';

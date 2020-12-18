@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       title: 'Covid tracing',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,

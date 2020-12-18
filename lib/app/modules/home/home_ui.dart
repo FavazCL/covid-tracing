@@ -43,7 +43,7 @@ class HomeUI extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  top: responsive.dp(2),
+                  top: responsive.hp(2),
                   child: Container(
                     width: responsive.width,
                     child: Text('Covid Tracing',
@@ -55,8 +55,8 @@ class HomeUI extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  top: responsive.dp(13),
-                  left: responsive.dp(10),
+                  top: responsive.hp(14),
+                  left: responsive.wp(22.5),
                   child: Hero(
                       tag: 'scan',
                       child: ScanButton(
@@ -66,8 +66,8 @@ class HomeUI extends StatelessWidget {
                       )),
                 ),
                 Positioned(
-                  top: responsive.dp(1),
-                  right: responsive.dp(1),
+                  top: responsive.hp(1),
+                  right: responsive.wp(1),
                   child: Container(
                       child: IconButton(
                           iconSize: responsive.dp(2.5),
@@ -76,8 +76,8 @@ class HomeUI extends StatelessWidget {
                           onPressed: (() => Get.toNamed(AppRoutes.UPLOAD)))),
                 ),
                 Positioned(
-                  top: responsive.dp(1),
-                  left: responsive.dp(1),
+                  top: responsive.hp(1),
+                  left: responsive.wp(1),
                   child: Container(
                       child: IconButton(
                           iconSize: responsive.dp(2.5),
@@ -88,7 +88,7 @@ class HomeUI extends StatelessWidget {
                           })),
                 ),
                 Positioned(
-                  bottom: responsive.dp(14),
+                  bottom: responsive.hp(15),
                   child: Container(
                     width: responsive.width,
                     child: Column(

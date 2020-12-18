@@ -144,9 +144,9 @@ class DBAPI {
   Future updateContact({Contact contact}) async {
     final db = await database;
 
-    final res = await db.update('contacts', contact.toJson(),
+    await db.update('contacts', contact.toJson(),
         where: 'id = ?', whereArgs: [contact.id]);
-    print('ressssss: $res');
+
     return true;
   }
 

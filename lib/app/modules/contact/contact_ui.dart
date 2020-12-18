@@ -25,7 +25,7 @@ class _ContactUIState extends State<ContactUI> {
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
     final HomeController _homeController = Get.put<HomeController>(HomeController());
-    print('${_homeController.contacts}');
+
     return GetBuilder<ContactController>(
       id: 'contact',
       builder: (_) => Scaffold(
@@ -49,7 +49,7 @@ class _ContactUIState extends State<ContactUI> {
                     width: responsive.width,
                     child: Column(
                       children: [
-                        SizedBox(height: responsive.dp(2.5)),
+                        SizedBox(height: responsive.hp(2.5)),
                         Paragraph(
                             text: '¿Qué es un contacto estrecho?',
                             fontSize: 2,

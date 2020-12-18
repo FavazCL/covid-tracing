@@ -20,7 +20,7 @@ class SympCard extends StatelessWidget {
     final Responsive responsive = Responsive.of(context);
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: responsive.dp(2)),
+      padding: EdgeInsets.symmetric(horizontal: responsive.wp(4)),
       child: Card(
           color: ColorsPalette.primary,
           elevation: .8,
