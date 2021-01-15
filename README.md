@@ -6,4 +6,3 @@ Sistema de rastreo de contactos estrechos mediante una aplicación móvil con un
 
 https://drive.google.com/file/d/12f296JIcKvBha0ojqqYOvYhjdxK8IHPh/view?usp=sharing
 
-
